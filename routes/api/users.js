@@ -6,5 +6,6 @@ const router = express.Router()
 // Who can access this route. Anyone. No JSW required. 
 
 router.get('/', (req, res) => res.send("users"))
+router.get('/signup', (req, res) => res.send("sign-up form"))
 
 module.exports = router
