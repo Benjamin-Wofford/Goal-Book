@@ -4,7 +4,8 @@
   "description": "Share goals with friends and strangers and support each others progress",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "server": "nodemon server"
   },
   "author": "Benjamin N. Wofford",
   "license": "MIT",
