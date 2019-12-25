@@ -1,0 +1,11 @@
+{
+  "name": "goal-sharer",
+  "version": "1.0.0",
+  "description": "Share goals with friends and strangers and support each others progress",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benjamin N. Wofford",
+  "license": "MIT"
+}
