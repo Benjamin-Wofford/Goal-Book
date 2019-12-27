@@ -39,7 +39,8 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   },
   goalsCompleted: {
-    type: Number
+    type: Number, 
+    default: 0
   },
   motto: {
     type: String
