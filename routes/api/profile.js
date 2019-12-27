@@ -51,7 +51,7 @@ router.post("/", auth, async (req, res) => {
   profileFields.social = {};
   if (youtube) profileFields.social.youtube = youtube;
   if (twitter) profileFields.social.twitter = twitter;
-  if (facbeook) profileFields.social.facebook = facebook;
+  if (facebook) profileFields.social.facebook = facebook;
   if (linkedin) profileFields.social.linkedin = linkedin;
   if (instagram) profileFields.social.instagram = instagram;
 
@@ -60,7 +60,7 @@ router.post("/", auth, async (req, res) => {
 
     // Update
     if (profile) {
-      await Profile.findOneAndUpdate(
+      profile = await Profile.findOneAndUpdate(
         { user: req.user.id },
         { $set: profileFields },
         { new: true }
@@ -73,7 +73,7 @@ router.post("/", auth, async (req, res) => {
     profile = new Profile(profileFields);
 
     await profile.save();
-    res.json(profile);
+    return res.json(profile);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server error");
