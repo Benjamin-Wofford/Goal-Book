@@ -82,4 +82,36 @@ router.post("/", auth, async (req, res) => {
   res.send("You made it to the bottom of profile route");
 });
 
+// The route to the application is GET api/profile/all
+// The description: Get all profiles
+// Who can access this route. Public.
+
+router.get('/all', async (req, res) => {
+    try {
+        const profiles = await Profile.find().populate('user', ['name', 'avatar'])
+        res.json(profiles)
+    } catch (error) {
+        res.status(500).send('Server Error')
+    }
+})
+
+// The route to the application is GET api/profile/user/:user_id
+// The description: Get profile by user ID
+// Who can access this route. Public.
+
+router.get('/user/:user_id', async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar'])
+
+        if (!profile){
+            return res.status(400).json({ msg: 'There is no profile for this user' })
+        }
+
+        res.json(profile)
+    } catch (error) {
+        res.status(500).send('Server Error right here')
+    }
+})
+
+
 module.exports = router;
