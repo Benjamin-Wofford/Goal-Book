@@ -20,7 +20,7 @@ const GoalSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "user"
       }
     }
   ],
@@ -28,7 +28,7 @@ const GoalSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "user"
       },
       text: {
         type: String,
@@ -49,6 +49,10 @@ const GoalSchema = new Schema({
   date: {
       type: Date,
       default: Date.now
+  },
+  goalCompleted: {
+      type: Boolean,
+      default: false
   }
 });
 

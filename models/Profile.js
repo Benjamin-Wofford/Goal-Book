@@ -1,23 +1,8 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
-// Create goal sub-document to embed inside of User schema. May need to be altered if it doesn't work later.
 
-const goalSchema = new mongoose.Schema({
-  goal: {
-    type: String,
-    required: true
-  },
-  completed: {
-    type: Boolean,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now()
-  }
-});
-
-const ProfileSchema = new mongoose.Schema({
+const ProfileSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
@@ -28,9 +13,14 @@ const ProfileSchema = new mongoose.Schema({
   bio: {
     type: String
   },
-  goals: {
-    type: [goalSchema]
-  },
+  goals:[
+    {
+      goal: {
+        type: Schema.Types.ObjectId,
+        ref: "goal"
+      }
+    }
+  ],
   goalsCompleted: {
     type: Number,
     default: 0
