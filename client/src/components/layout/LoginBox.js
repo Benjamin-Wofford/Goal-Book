@@ -1,36 +1,76 @@
 import React from "react";
-import { Paper, TextField, Button, Typography, makeStyles } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Typography,
+  makeStyles,
+  Container,
+  CssBaseline,
+  Link,
+  Paper
+} from "@material-ui/core";
 
-
-const useStyles = makeStyles({
-  mainElement: {
-    fontWeight: '500', 
-    fontFamily: 'Ma Shan Zheng',
-    color: '#424242'
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
-});
+  goalBook: {
+    fontWeight: "500",
+    fontFamily: "Ma Shan Zheng",
+    color: "#424242"
+  },
+  submit: {
+    margin: theme.spacing(2, 0, 2),
+  }
+}));
 
 const LoginBox = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
-    <Paper style={{  paddingTop: 128, paddingBottom: 128, paddingRight: 96, paddingLeft: 96 }} elevation={4}>
-      <Typography className={classes.mainElement} variant="h1" align='center'>Goal</Typography>
-      <Typography className={classes.mainElement} variant="h1" align='center'>Book</Typography>
-      <form style={{ marginTop: 48 }} noValidate autoComplete="off">
-        <TextField id="standard-basic" label="Email" />
-      </form>
-      <form
-        style={{ marginTop: 12, marginBottom: 24 }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="standard-basic" label="Password" />
-      </form>
-      <Button style={{ paddingLeft: 24, paddingRight: 24}} color="primary" variant='contained'>Login</Button>
-      <Button style={{  marginLeft: 12, paddingLeft: 24, paddingRight: 16 }} color="secondary" variant='outlined'>
-        Sign up
-      </Button>
-    </Paper>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography className={classes.goalBook} variant="h2">
+          Goal
+        </Typography>
+        <Typography className={classes.goalBook} variant="h1">
+          Book
+        </Typography>
+        <form noValidate autoComplete="off">
+          <TextField
+            id="standard-basic"
+            label="Email"
+            fullWidth
+            variant="outlined"
+            required
+            margin='normal'
+            autoFocus
+          />
+
+          <TextField
+            id="standard-basic"
+            label="Password"
+            fullWidth
+            variant="outlined"
+            required
+            margin='normal'
+          />
+
+          <Button
+            color="primary"
+            variant="contained"
+            fullWidth
+            className={classes.submit}
+          >
+            Login
+          </Button>
+          <Link>Don't have an account? Sign Up</Link>
+        </form>
+      </div>
+    </Container>
   );
 };
 
