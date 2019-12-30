@@ -5,7 +5,7 @@ import LoginBox from "./components/layout/LoginBox";
 
 const App = () => {
   return (
-    <Grid container  direction='column' alignItems='center' justify='center'>
+    <Grid container direction='column' alignItems='center' justify='center'>
       <Grid item>
         <LoginBox />
       </Grid>
