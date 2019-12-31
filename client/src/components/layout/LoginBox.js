@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -6,8 +7,7 @@ import {
   makeStyles,
   Container,
   CssBaseline,
-  Link,
-  Paper
+  Link
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     color: "#424242"
   },
   submit: {
-    margin: theme.spacing(2, 0, 2),
+    margin: theme.spacing(2, 0, 2)
   }
 }));
 
@@ -46,7 +46,7 @@ const LoginBox = () => {
             fullWidth
             variant="outlined"
             required
-            margin='normal'
+            margin="normal"
             autoFocus
           />
 
@@ -56,18 +56,22 @@ const LoginBox = () => {
             fullWidth
             variant="outlined"
             required
-            margin='normal'
+            margin="normal"
           />
 
-          <Button
-            color="primary"
-            variant="contained"
-            fullWidth
-            className={classes.submit}
-          >
-            Login
-          </Button>
+          <RouterLink to='/login'>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              className={classes.submit}
+            >
+              Login
+            </Button>
+          </RouterLink>
+          <RouterLink to='/Signup' style={{textDecoration: 'none'}}>
           <Link>Don't have an account? Sign Up</Link>
+          </RouterLink>
         </form>
       </div>
     </Container>
