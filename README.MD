@@ -58,12 +58,12 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [React](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Material UI](https://maven.apache.org/) - Dependency Management
+* [React](http://react.com/) - The front-end library used
+* [Material UI](https://material-ui.com/) - Styling
 
 ## Authors
 
-* **Benjamin Wofford** - *All Work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Benjamin Wofford** - *All Work* - [PurpleBooth](https://github.com/Benjamin-Wofford)
 
 ## License
 
