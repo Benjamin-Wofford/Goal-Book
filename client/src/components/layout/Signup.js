@@ -41,7 +41,7 @@ const Signup = () => {
         </Typography>
         <Typography variant="h6">Sign Up</Typography>
         <form noValidate autoComplete="off">
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="First Name"
@@ -50,6 +50,7 @@ const Signup = () => {
                 required
                 margin="normal"
                 autoComplete="none"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -62,33 +63,38 @@ const Signup = () => {
                 autoComplete="none"
               />
             </Grid>
+            </Grid>
+            <Grid container>
+            <Grid item xs={12}>
+            <TextField
+              label="Email"
+              fullWidth
+              variant="outlined"
+              required
+              margin="normal"
+             
+              autoComplete="none"
+            />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+              label="Password"
+              fullWidth
+              variant="outlined"
+              required
+              margin="normal"
+            />
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+              label="Confirm Password"
+              fullWidth
+              variant="outlined"
+              required
+              margin="normal"
+            />
+            </Grid>
           </Grid>
-
-          <TextField
-            label="Email"
-            fullWidth
-            variant="outlined"
-            required
-            margin="normal"
-            autoFocus
-            autoComplete="none"
-          />
-
-          <TextField
-            label="Password"
-            fullWidth
-            variant="outlined"
-            required
-            margin="normal"
-          />
-          <TextField
-            label="Confirm Password"
-            fullWidth
-            variant="outlined"
-            required
-            margin="normal"
-          />
-
           <Link to="/login">
             <Button
               color="primary"
@@ -96,7 +102,7 @@ const Signup = () => {
               fullWidth
               className={classes.submit}
             >
-              Login
+              Sign Up
             </Button>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>

@@ -1,13 +1,12 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   TextField,
   Button,
   Typography,
   makeStyles,
   Container,
-  CssBaseline,
-  Link
+  CssBaseline
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -33,12 +32,13 @@ const LoginBox = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography className={classes.goalBook} variant="h2">
+        <Typography className={classes.goalBook} variant="h3">
           Goal
         </Typography>
         <Typography className={classes.goalBook} variant="h1">
           Book
         </Typography>
+        <Typography variant="h6">Login</Typography>
         <form noValidate autoComplete="off">
           <TextField
             id="standard-basic"
@@ -59,7 +59,7 @@ const LoginBox = () => {
             margin="normal"
           />
 
-          <RouterLink to='/login'>
+          <Link to='/login'>
             <Button
               color="primary"
               variant="contained"
@@ -68,10 +68,10 @@ const LoginBox = () => {
             >
               Login
             </Button>
-          </RouterLink>
-          <RouterLink to='/Signup' style={{textDecoration: 'none'}}>
-          <Link>Don't have an account? Sign Up</Link>
-          </RouterLink>
+          </Link>
+          <Link to='/Signup' style={{textDecoration: 'none'}}>
+          Don't have an account? Sign Up
+          </Link>
         </form>
       </div>
     </Container>
