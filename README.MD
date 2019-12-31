@@ -63,7 +63,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Benjamin Wofford** - *All Work* - [PurpleBooth](https://github.com/Benjamin-Wofford)
+* **Benjamin Wofford** - *All Work* - [GitHub](https://github.com/Benjamin-Wofford)
 
 ## License
 
