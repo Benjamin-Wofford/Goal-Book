@@ -43,15 +43,25 @@ const Signup = () => {
 
   const { first_name, last_name, email, password, password2 } = formData;
 
-  const handleOnChange = e =>
+  const handleOnChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleOnSubmit = e => {
+    e.preventDefault()
+    if(password !== password2){
+      console.log('Passwords do not match')
+    } else {
+      console.log(formData)
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <GoalIcon />
-        <form className={classes.form} noValidate autoComplete="off">
+        <form className={classes.form} onSubmit={e => handleOnSubmit(e)}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -122,16 +132,17 @@ const Signup = () => {
               />
             </Grid>
           </Grid>
-          <Link to="/login">
+          {/* <Link to="/login"> */}
             <Button
               color="primary"
               variant="contained"
               fullWidth
+              type='submit'
               className={classes.submit}
             >
               Sign Up
             </Button>
-          </Link>
+          {/* </Link> */}
           <Link to="/" style={{ textDecoration: "none" }}>
             Already have an account? Login
           </Link>
