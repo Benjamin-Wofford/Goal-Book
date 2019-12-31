@@ -1,9 +1,9 @@
 import React from "react";
+import GoalIcon from './GoalIcon'
 import { Link } from "react-router-dom";
 import {
   TextField,
   Button,
-  Typography,
   makeStyles,
   Container,
   CssBaseline
@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(2, 0, 2)
+  }, 
+  form: {
+    marginTop: theme.spacing(5)
   }
 }));
 
@@ -32,14 +35,8 @@ const LoginBox = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography className={classes.goalBook} variant="h3">
-          Goal
-        </Typography>
-        <Typography className={classes.goalBook} variant="h1">
-          Book
-        </Typography>
-        <Typography variant="h6">Login</Typography>
-        <form noValidate autoComplete="off">
+        <GoalIcon/>
+        <form noValidate autoComplete="off" className={classes.form}>
           <TextField
             id="standard-basic"
             label="Email"

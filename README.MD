@@ -61,7 +61,7 @@ Add additional notes about how to deploy this on a live system
 * [React](http://react.com/) - The front-end library used
 * [Material UI](https://material-ui.com/) - Styling
 
-## Authors
+## Author
 
 * **Benjamin Wofford** - *All Work* - [GitHub](https://github.com/Benjamin-Wofford)
 
@@ -72,3 +72,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Traversy Media
+* Icons made by [Freepik]("https://www.flaticon.com/authors/freepik") from [Flaticon]("https://wwww.flaticon.com")
