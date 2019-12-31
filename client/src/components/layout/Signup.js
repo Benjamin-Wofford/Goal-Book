@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import GoalIcon from './GoalIcon'
+import GoalIcon from "./GoalIcon";
 import {
   TextField,
   Button,
@@ -32,15 +32,32 @@ const useStyles = makeStyles(theme => ({
 
 const Signup = () => {
   const classes = useStyles();
+
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    password2: ""
+  });
+
+  const { first_name, last_name, email, password, password2 } = formData;
+
+  const handleOnChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <GoalIcon/>
+        <GoalIcon />
         <form className={classes.form} noValidate autoComplete="off">
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <TextField
+                name="first_name"
+                value={first_name}
+                onChange={e => handleOnChange(e)}
                 label="First Name"
                 fullWidth
                 variant="outlined"
@@ -53,6 +70,9 @@ const Signup = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Last Name"
+                name="last_name"
+                value={last_name}
+                onChange={e => handleOnChange(e)}
                 fullWidth
                 variant="outlined"
                 required
@@ -60,36 +80,46 @@ const Signup = () => {
                 autoComplete="none"
               />
             </Grid>
-            </Grid>
-            <Grid container>
+          </Grid>
+          <Grid container>
             <Grid item xs={12}>
-            <TextField
-              label="Email"
-              fullWidth
-              variant="outlined"
-              required
-              margin="normal"
-             
-              autoComplete="none"
-            />
-            </Grid>
-            <Grid item xs={12}>
-            <TextField
-              label="Password"
-              fullWidth
-              variant="outlined"
-              required
-              margin="normal"
-            />
+              <TextField
+                label="Email"
+                fullWidth
+                variant="outlined"
+                required
+                margin="normal"
+                name="email"
+                value={email}
+                onChange={e => handleOnChange(e)}
+                autoComplete="none"
+              />
             </Grid>
             <Grid item xs={12}>
-            <TextField
-              label="Confirm Password"
-              fullWidth
-              variant="outlined"
-              required
-              margin="normal"
-            />
+              <TextField
+                label="Password"
+                name="password"
+                value={password}
+                type="password"
+                onChange={e => handleOnChange(e)}
+                fullWidth
+                variant="outlined"
+                required
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="password"
+                label="Confirm Password"
+                fullWidth
+                variant="outlined"
+                required
+                margin="normal"
+                name="password2"
+                value={password2}
+                onChange={e => handleOnChange(e)}
+              />
             </Grid>
           </Grid>
           <Link to="/login">
