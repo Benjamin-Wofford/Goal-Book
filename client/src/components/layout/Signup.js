@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GoalIcon from "../GoalIcon";
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import PropTypes from 'prop-types'
 import {
   TextField,
   Button,
@@ -30,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = () => {
+const Signup = ({ setAlert }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -48,14 +51,13 @@ const Signup = () => {
   };
 
   const handleOnSubmit = async e => {
-    e.preventDefault()
-    if(password !== password2){
-      console.log('Passwords do not match')
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert("Passwords do not match", "danger");
     } else {
-    console.log('Success')
-      }
+      console.log("Success");
     }
-  
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -133,17 +135,15 @@ const Signup = () => {
               />
             </Grid>
           </Grid>
-          {/* <Link to="/login"> */}
-            <Button
-              color="primary"
-              variant="contained"
-              fullWidth
-              type='submit'
-              className={classes.submit}
-            >
-              Sign Up
-            </Button>
-          {/* </Link> */}
+          <Button
+            color="primary"
+            variant="contained"
+            fullWidth
+            type="submit"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
           <Link to="/" style={{ textDecoration: "none" }}>
             Already have an account? Login
           </Link>
@@ -153,4 +153,8 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  setAlert: PropTypes.func.isRequired
+}
+
+export default connect(null, { setAlert })(Signup);
