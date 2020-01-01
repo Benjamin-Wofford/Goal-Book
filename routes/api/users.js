@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const config = require("config");
 const User = require("../../models/User");
+
 // The route to the application is POST api/users
 // The description: Sign-up user
 // Who can access this route. Anyone. No JSW required.
@@ -13,7 +14,10 @@ const User = require("../../models/User");
 router.post(
   "/signup",
   [
-    check("name", "A name is required")
+    check("first_name", "A first name is required")
+      .not()
+      .isEmpty(),
+    check("last_name", "A last name is required")
       .not()
       .isEmpty(),
     check("email", "A valid email is required").isEmail(),
@@ -30,13 +34,12 @@ router.post(
     }
 
     const {
-      name,
+      first_name,
+      last_name,
       email,
       password,
       createdAt,
-      goalsCompleted,
-      motto,
-      goals
+      goalsCompleted
     } = req.body;
 
     try {
@@ -54,15 +57,15 @@ router.post(
       });
 
       user = new User({
-        name,
+        first_name,
+        last_name,
         email,
         password,
         avatar,
         createdAt,
-        goalsCompleted,
-        motto,
-        goals
+        goalsCompleted
       });
+      
       // Encrypt password
       const salt = await bcrypt.genSalt(10);
 

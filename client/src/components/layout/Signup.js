@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GoalIcon from "./GoalIcon";
+import axios from 'axios'
 import {
   TextField,
   Button,
@@ -47,12 +48,33 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = async e => {
     e.preventDefault()
     if(password !== password2){
       console.log('Passwords do not match')
     } else {
-      console.log(formData)
+      const newUser = {
+        first_name, 
+        last_name,
+        email, 
+        password
+      }
+
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+
+          const body = JSON.stringify(newUser)
+
+          const res = await axios.post('/api/users/signup', body, config)
+          console.log(res.data)
+        
+      } catch (error) {
+        console.error(error.response.data)
+      }
     }
   }
 
