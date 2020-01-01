@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import GoalIcon from "./GoalIcon";
+import GoalIcon from "../GoalIcon";
 import {
   TextField,
   Button,
