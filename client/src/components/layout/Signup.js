@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import GoalIcon from "./GoalIcon";
+import GoalIcon from "../GoalIcon";
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import PropTypes from 'prop-types'
 import {
   TextField,
   Button,
@@ -30,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = () => {
+const Signup = ({ setAlert }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -149,4 +152,8 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  setAlert: PropTypes.func.isRequired
+}
+
+export default connect(null, { setAlert })(Signup);
