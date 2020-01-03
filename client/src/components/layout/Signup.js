@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GoalIcon from "../GoalIcon";
-import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
-import PropTypes from 'prop-types'
 import {
   TextField,
   Button,
@@ -50,10 +47,11 @@ const Signup = ({ setAlert }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleOnSubmit =  e => {
+  const handleOnSubmit = e => {
     e.preventDefault();
-    if(password !== password2) return setFormData({error: true})
-    return console.log('success')
+    if (password !== password2)
+      return setFormData({ ...formData, error: true });
+    return console.log("success");
   };
 
   return (
@@ -107,6 +105,7 @@ const Signup = ({ setAlert }) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={formData.error}
                 label="Password"
                 name="password"
                 value={password}
@@ -121,7 +120,7 @@ const Signup = ({ setAlert }) => {
             <Grid item xs={12}>
               <TextField
                 error={formData.error}
-                helperText={ formData.error ? 'Passwords do not match' : null}
+                helperText={formData.error ? "Passwords do not match" : null}
                 type="password"
                 label="Confirm Password"
                 fullWidth
@@ -152,8 +151,4 @@ const Signup = ({ setAlert }) => {
   );
 };
 
-Signup.propTypes = {
-  setAlert: PropTypes.func.isRequired
-}
-
-export default connect(null, { setAlert })(Signup);
+export default Signup;
