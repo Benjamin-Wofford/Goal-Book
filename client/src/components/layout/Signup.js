@@ -47,15 +47,11 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleOnSubmit = async e => {
-    e.preventDefault()
-    if(password !== password2){
-      console.log('Passwords do not match')
-    } else {
-    console.log('Success')
-      }
-    }
-  
+  const handleOnSubmit =  e => {
+    e.preventDefault();
+    if(password !== password2) return setFormData({error: true})
+    return console.log('success')
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -121,6 +117,8 @@ const Signup = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={formData.error}
+                helperText={ formData.error ? 'Passwords do not match' : null}
                 type="password"
                 label="Confirm Password"
                 fullWidth
@@ -133,17 +131,15 @@ const Signup = () => {
               />
             </Grid>
           </Grid>
-          {/* <Link to="/login"> */}
-            <Button
-              color="primary"
-              variant="contained"
-              fullWidth
-              type='submit'
-              className={classes.submit}
-            >
-              Sign Up
-            </Button>
-          {/* </Link> */}
+          <Button
+            color="primary"
+            variant="contained"
+            fullWidth
+            type="submit"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
           <Link to="/" style={{ textDecoration: "none" }}>
             Already have an account? Login
           </Link>
