@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import GoalIcon from "../GoalIcon";
 import {
   TextField,
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = ({ setAlert }) => {
+const Signup = () => {
   const classes = useStyles();
 
   const initialState = {
@@ -46,21 +47,21 @@ const Signup = ({ setAlert }) => {
       case "register_success":
         localStorage.setItem("token", payload.token);
         return {
-          ...state, 
+          ...state,
           ...payload,
           isAuthenticated: true,
           loading: false
-        }
-        case 'register_fail':
-          localStorage.removeItem('token')
-          return {
-            ...state, 
-            token: null, 
-            isAuthenticated: false, 
-            loading: false
-          }
-        default: 
-        return state
+        };
+      case "register_fail":
+        localStorage.removeItem("token");
+        return {
+          ...state,
+          token: null,
+          isAuthenticated: false,
+          loading: false
+        };
+      default:
+        return state;
     }
   };
 
@@ -82,11 +83,38 @@ const Signup = ({ setAlert }) => {
     }
   };
 
+  const [userState, dispatch] = useReducer(reducer, initialState);
+  
   const handleOnSubmit = e => {
     e.preventDefault();
-    if (password !== password2)
+    if (password !== password2) {
       return setFormData({ ...formData, error: true });
-    return console.log("success");
+    } else {
+      const register = async ({ first_name, last_name, email, password }) => {
+        const config = {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+
+        const body = JSON.stringify({ first_name, last_name, email, password });
+        console.log("Action is being called");
+        try {
+          const res = await axios.post("/api/users/signup", body, config);
+
+          dispatch({
+            type: "register_success",
+            payload: res.data
+          });
+        } catch (error) {
+          dispatch({
+            type: "register_fail"
+          });
+        }
+      };
+      register({first_name, last_name, email, password})
+    }
+
   };
 
   return (
