@@ -33,6 +33,37 @@ const useStyles = makeStyles(theme => ({
 const Signup = ({ setAlert }) => {
   const classes = useStyles();
 
+  const initialState = {
+    token: localStorage.getItem("token"),
+    isAuthenticated: null,
+    loading: true,
+    user: null
+  };
+
+  const reducer = (state, action) => {
+    const { type, payload } = action;
+    switch (type) {
+      case "register_success":
+        localStorage.setItem("token", payload.token);
+        return {
+          ...state, 
+          ...payload,
+          isAuthenticated: true,
+          loading: false
+        }
+        case 'register_fail':
+          localStorage.removeItem('token')
+          return {
+            ...state, 
+            token: null, 
+            isAuthenticated: false, 
+            loading: false
+          }
+        default: 
+        return state
+    }
+  };
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -44,7 +75,11 @@ const Signup = ({ setAlert }) => {
   const { first_name, last_name, email, password, password2 } = formData;
 
   const handleOnChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (formData.error) {
+      setFormData({ ...formData, error: false });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   const handleOnSubmit = e => {
