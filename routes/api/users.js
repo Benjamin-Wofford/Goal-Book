@@ -14,17 +14,7 @@ const User = require("../../models/User");
 router.post(
   "/signup",
   [
-    check("first_name", "A first name is required")
-      .not()
-      .isEmpty(),
-    check("last_name", "A last name is required")
-      .not()
-      .isEmpty(),
     check("email", "A valid email is required").isEmail(),
-    check(
-      "password",
-      "Please enter a password with 6 or more characters."
-    ).isLength({ min: 6 })
   ],
   async (req, res) => {
     // Finds the validation errors in this request and wraps them in an object with handy functions
