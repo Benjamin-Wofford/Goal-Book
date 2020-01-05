@@ -1,6 +1,6 @@
-import React, { useState, useReducer } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import GoalIcon from "../GoalIcon";
 import {
   TextField,
@@ -34,37 +34,6 @@ const useStyles = makeStyles(theme => ({
 const Signup = () => {
   const classes = useStyles();
 
-  const initialState = {
-    token: localStorage.getItem("token"),
-    isAuthenticated: null,
-    loading: true,
-    user: null
-  };
-
-  const reducer = (state, action) => {
-    const { type, payload } = action;
-    switch (type) {
-      case "register_success":
-        localStorage.setItem("token", payload.token);
-        return {
-          ...state,
-          ...payload,
-          isAuthenticated: true,
-          loading: false
-        };
-      case "register_fail":
-        localStorage.removeItem("token");
-        return {
-          ...state,
-          token: null,
-          isAuthenticated: false,
-          loading: false
-        };
-      default:
-        return state;
-    }
-  };
-
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -83,36 +52,14 @@ const Signup = () => {
     }
   };
 
-  const [userState, dispatch] = useReducer(reducer, initialState);
+
   
   const handleOnSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
       return setFormData({ ...formData, error: true });
     } else {
-      const register = async ({ first_name, last_name, email, password }) => {
-        const config = {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        };
-
-        const body = JSON.stringify({ first_name, last_name, email, password });
-        console.log("Action is being called");
-        try {
-          const res = await axios.post("/api/users/signup", body, config);
-
-          dispatch({
-            type: "register_success",
-            payload: res.data
-          });
-        } catch (error) {
-          dispatch({
-            type: "register_fail"
-          });
-        }
-      };
-      register({first_name, last_name, email, password})
+      console.log('success')
     }
 
   };
