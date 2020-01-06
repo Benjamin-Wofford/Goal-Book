@@ -1,7 +1,9 @@
 import React, { useState} from "react";
 import { Link } from "react-router-dom";
-
+import { connect } from 'react-redux'
+import { setAlert } from '../../actions/alert'
 import GoalIcon from "../GoalIcon";
+import PropTypes from 'prop-types' 
 import {
   TextField,
   Button,
@@ -31,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = () => {
+const Signup = (props) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -57,6 +59,7 @@ const Signup = () => {
   const handleOnSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
+      props.setAlert("Yo password ain't correct", "danger")
       return setFormData({ ...formData, error: true });
     } else {
       console.log('success')
@@ -161,4 +164,8 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  setAlert: PropTypes.func.isRequired
+}
+
+export default connect(null, {setAlert})(Signup);

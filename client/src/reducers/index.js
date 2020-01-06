@@ -1,10 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
+import alert from "./alert";
 
-//Root reducer goes in this file
-
-
-
-
-
-
-export default combineReducers
+export default combineReducers({ alert });
