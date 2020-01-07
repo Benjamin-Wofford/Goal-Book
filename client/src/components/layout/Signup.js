@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
 import { setAlert } from '../../actions/alert'
 import GoalIcon from "../GoalIcon";
+import Alert from '../layout/Alert'
 import PropTypes from 'prop-types' 
 import {
   TextField,
@@ -59,8 +60,8 @@ const Signup = (props) => {
   const handleOnSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert("Yo password ain't correct", "danger")
-      return setFormData({ ...formData, error: true });
+      props.setAlert("Your password is incorrect", "danger")
+      return setFormData({ ...formData, error: true});
     } else {
       console.log('success')
     }
@@ -71,6 +72,7 @@ const Signup = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        <Alert/>
         <GoalIcon />
         <form className={classes.form} onSubmit={e => handleOnSubmit(e)}>
           <Grid container spacing={1}>

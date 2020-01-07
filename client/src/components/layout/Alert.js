@@ -13,11 +13,9 @@ const useStyles = makeStyles(theme => ({
 
 const Alert = ({ alerts }) => {
   const classes = useStyles();
+  
   const [open, setOpen] = useState(false);
 
-  const setOpenAlert = () => {
-    setOpen(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -58,9 +56,9 @@ const Alert = ({ alerts }) => {
   );
 };
 
-// Alert.PropTypes = {
-//   alert: PropTypes.array.isRequired
-// };
+Alert.propTypes = {
+  alert: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => ({
   alerts: state.alert
