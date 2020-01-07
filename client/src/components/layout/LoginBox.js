@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import GoalIcon from "../GoalIcon";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { login } from '../../actions/auth'
 import {
   TextField,
   Button,
@@ -43,6 +46,10 @@ const LoginBox = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = async e => {
+    e.preventDefault()
+    login(email, password)
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -91,4 +98,9 @@ const LoginBox = () => {
   );
 };
 
-export default LoginBox;
+
+LoginBox.propTypes = {
+  login: PropTypes.func.isRequired
+}
+
+export default connect(null, { login })(LoginBox);
