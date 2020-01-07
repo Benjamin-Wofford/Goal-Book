@@ -8,36 +8,44 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   close: {
     padding: theme.spacing(0.5)
+  },
+  myAlert: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   }
 }));
 
 const Alert = ({ alerts }) => {
   const classes = useStyles();
   
-  const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState(true);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
+    // --- TODO :: We need to add remove Alert from state.
+
     setOpen(false);
   };
 
   return (
-    <Snackbar
+    alerts.length > 0 && <Snackbar
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "left"
       }}
+      className={classes.myAlert}
       open={open}
       autoHideDuration={6000}
       onClose={handleClose}
       ContentProps={{
         "aria-describedby": "message-id"
       }}
-      message={<span id="message-id">Note archived</span>}
+      message={<span id="message-id">{ alerts[0].msg }</span>}
       action={[
         <Button key="undo" color="secondary" size="small" onClick={handleClose}>
           UNDO
@@ -57,7 +65,7 @@ const Alert = ({ alerts }) => {
 };
 
 Alert.propTypes = {
-  alert: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
