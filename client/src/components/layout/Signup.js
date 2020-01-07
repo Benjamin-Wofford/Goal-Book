@@ -2,8 +2,8 @@ import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
 import { setAlert } from '../../actions/alert'
+import { register } from '../../actions/auth'
 import GoalIcon from "../GoalIcon";
-import Alert from '../layout/Alert'
 import PropTypes from 'prop-types' 
 import {
   TextField,
@@ -60,10 +60,10 @@ const Signup = (props) => {
   const handleOnSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert("Your password is incorrect", "danger")
+      props.setAlert("Your password is incorrect", "danger", true)
       return setFormData({ ...formData, error: true});
     } else {
-      console.log('success')
+      props.register({first_name, last_name, email, password})
     }
 
   };
@@ -72,7 +72,6 @@ const Signup = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Alert/>
         <GoalIcon />
         <form className={classes.form} onSubmit={e => handleOnSubmit(e)}>
           <Grid container spacing={1}>
@@ -167,7 +166,8 @@ const Signup = (props) => {
 };
 
 Signup.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 }
 
-export default connect(null, {setAlert})(Signup);
+export default connect(null, {setAlert, register})(Signup);
