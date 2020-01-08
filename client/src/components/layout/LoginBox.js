@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import GoalIcon from "../GoalIcon";
-import { Link } from "react-router-dom";
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { login } from '../../actions/auth'
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/auth";
 import {
   TextField,
   Button,
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginBox = () => {
+const LoginBox = (props) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -47,16 +47,22 @@ const LoginBox = () => {
   };
 
   const onSubmit = async e => {
-    e.preventDefault()
-    login(email, password)
+    e.preventDefault();
+    props.login(email, password);
+  };
+
+  // Redirect if logged in
+  if(props.isAuthenticated){
+    return <Redirect to="/dashboard" />
   }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <GoalIcon />
-        <form noValidate className={classes.form}>
+        <form noValidate className={classes.form} onSubmit={e => onSubmit(e)}>
           <TextField
+            name="email"
             onChange={e => handleOnChange(e)}
             value={email}
             id="standard-basic"
@@ -69,6 +75,7 @@ const LoginBox = () => {
           />
 
           <TextField
+            name="password"
             onChange={e => handleOnChange(e)}
             value={password}
             id="standard-basic"
@@ -77,18 +84,20 @@ const LoginBox = () => {
             variant="outlined"
             required
             margin="normal"
+            type="password"
           />
 
-          <Link to="/login">
+          {/* <Link to="/login"> */}
             <Button
               color="primary"
               variant="contained"
               fullWidth
               className={classes.submit}
+              type='submit'
             >
               Login
             </Button>
-          </Link>
+          {/* </Link> */}
           <Link to="/Signup" style={{ textDecoration: "none" }}>
             Don't have an account? Sign Up
           </Link>
@@ -98,9 +107,13 @@ const LoginBox = () => {
   );
 };
 
-
 LoginBox.propTypes = {
-  login: PropTypes.func.isRequired
-}
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
 
-export default connect(null, { login })(LoginBox);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { login })(LoginBox);
