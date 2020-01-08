@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 
 
-const dashboard = props => {
+const Dashboard = props => {
     return (
         <>
         <Navbar/>
@@ -14,4 +14,4 @@ const dashboard = props => {
 }
 
 
-export default dashboard
+export default Dashboard
