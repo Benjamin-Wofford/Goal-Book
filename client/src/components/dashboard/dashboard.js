@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
-import PropTypes from 'prop-types'
+
 
 const dashboard = props => {
     return (
@@ -13,8 +13,5 @@ const dashboard = props => {
     )
 }
 
-dashboard.propTypes = {
-
-}
 
 export default dashboard

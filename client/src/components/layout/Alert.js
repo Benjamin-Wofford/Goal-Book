@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Snackbar, IconButton, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
@@ -56,9 +55,6 @@ const Alert = ({ alerts }) => {
   );
 };
 
-Alert.propTypes = {
-  alert: PropTypes.array.isRequired
-};
 
 const mapStateToProps = state => ({
   alerts: state.alert
