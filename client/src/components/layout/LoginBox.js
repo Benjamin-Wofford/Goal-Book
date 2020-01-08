@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginBox = (props) => {
+const LoginBox = props => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -52,8 +52,8 @@ const LoginBox = (props) => {
   };
 
   // Redirect if logged in
-  if(props.isAuthenticated){
-    return <Redirect to="/dashboard" />
+  if (props.isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -87,17 +87,16 @@ const LoginBox = (props) => {
             type="password"
           />
 
-          {/* <Link to="/login"> */}
-            <Button
-              color="primary"
-              variant="contained"
-              fullWidth
-              className={classes.submit}
-              type='submit'
-            >
-              Login
-            </Button>
-          {/* </Link> */}
+          <Button
+            color="primary"
+            variant="contained"
+            fullWidth
+            className={classes.submit}
+            type="submit"
+          >
+            Login
+          </Button>
+
           <Link to="/Signup" style={{ textDecoration: "none" }}>
             Don't have an account? Sign Up
           </Link>
@@ -114,6 +113,6 @@ LoginBox.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
-})
+});
 
 export default connect(mapStateToProps, { login })(LoginBox);

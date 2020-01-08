@@ -5,6 +5,7 @@ import NotFound from "./components/layout/NotFound";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signup from "./components/layout/Signup";
 import Alert from './components/layout/Alert'
+import Dashboard from './components/dashboard/dashboard'
 // Redux
 import { Provider } from "react-redux";
 import { loadUser } from './actions/auth'
@@ -29,6 +30,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={LoginBox} />
           <Route exact path="/Signup" component={Signup} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

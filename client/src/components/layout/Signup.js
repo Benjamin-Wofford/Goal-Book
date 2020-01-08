@@ -1,10 +1,10 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { connect } from 'react-redux'
-import { setAlert } from '../../actions/alert'
-import { register } from '../../actions/auth'
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 import GoalIcon from "../GoalIcon";
-import PropTypes from 'prop-types' 
+import PropTypes from "prop-types";
 import {
   TextField,
   Button,
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Signup = (props) => {
+const Signup = props => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -55,20 +55,18 @@ const Signup = (props) => {
     }
   };
 
-
-  
   const handleOnSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert("Your password is incorrect", "danger", true)
-      return setFormData({ ...formData, error: true});
+      props.setAlert("Your password is incorrect", "danger", true);
+      return setFormData({ ...formData, error: true });
     } else {
-      props.register({first_name, last_name, email, password})
+      props.register({ first_name, last_name, email, password });
     }
   };
 
-  if(props.isAuthenticated){
-    return <Redirect to='/dashboard' />
+  if (props.isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -172,10 +170,10 @@ Signup.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
-})
+});
 
-export default connect(mapStateToProps, {setAlert, register})(Signup);
+export default connect(mapStateToProps, { setAlert, register })(Signup);
