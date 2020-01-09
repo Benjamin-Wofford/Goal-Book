@@ -17,25 +17,29 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  appbar: {
+    height: 0
+  }
 }));
 
-const Navbar = ({auth: { isAuthenticated, loading}, logout}) => {
+const Navbar = ({auth: { isAuthenticated, loading }, logout}) => {
 
 
 
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+   
+      <AppBar position="relative" >
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} noWrap>
             Goal Book
           </Typography>
-          <Button href="!#" color="inherit" onClick={logout}>Logout</Button>
+          <Button color="inherit">Dashboard</Button>
+          <Button href="/" color="inherit" onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>
-    </div>
+    
   );
 }
 

@@ -1,18 +1,80 @@
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom'
 import Navbar from "./Navbar";
+import GoalIcon from "../GoalIcon";
 import PropTypes from "prop-types";
+import Spinner from "../layout/Spinner";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
+import {
+  Typography,
+  TextField,
+  Button,
+  makeStyles,
+  Container,
+  CssBaseline
+} from "@material-ui/core";
 
-const Dashboard = ({ getCurrentProfile, auth, profile }) => {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  submit: {
+    margin: theme.spacing(2, 0, 2)
+  },
+  form: {
+    marginTop: theme.spacing(5)
+  }
+}));
+
+const Dashboard = ({
+  getCurrentProfile,
+  auth: { user },
+  profile: { profile, loading }
+}) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
 
-  return (
+  const classes = useStyles();
+
+  // If there is no profile, then show a loading spinner
+
+  return loading && profile === null ? (
+    <Spinner />
+  ) : (
     <>
-      <Navbar />
-      <div>Dashboard</div>
+      {profile !== null ? (
+        <>Has</>
+      ) : (
+        <>
+          <Navbar />
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Typography variant="h5">{user && user.first_name}'s</Typography>
+              <Typography variant="h1"> Dashboard</Typography>
+              <GoalIcon />
+              <form noValidate className={classes.form}>
+                <Link to='/create-profile'>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  fullWidth
+                  className={classes.submit}
+                  type="submit"
+                >
+                  Create Profile
+                </Button>
+                </Link>
+              </form>
+            </div>
+          </Container>
+        </>
+      )}
     </>
   );
 };

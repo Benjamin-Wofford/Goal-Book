@@ -19,11 +19,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center"
   },
-  goalBook: {
-    fontWeight: "500",
-    fontFamily: "Ma Shan Zheng",
-    color: "#424242"
-  },
   submit: {
     margin: theme.spacing(2, 0, 2)
   },
@@ -52,9 +47,11 @@ const LoginBox = props => {
   };
 
   // Redirect if logged in
+
   if (props.isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
+  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
