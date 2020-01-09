@@ -65,35 +65,25 @@ const CreateProfile = props => {
           </Typography>
           <form className={classes.form}>
             <Grid container spacing={1}>
-                <Grid item xs={12}>
-              <TextField
-                id="outlined-multiline-static"
-                label="About me"
-                multiline
-                fullWidth
-                rowsMax="4"
-                variant="outlined"
-              />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  name="first_name"
-                  label="First Name"
+                  id="outlined-multiline-static"
+                  label="About me"
+                  multiline
                   fullWidth
-                  variant="outlined"
-                  required
                   margin="normal"
-                  autoComplete="none"
+                  rowsMax="4"
+                  variant="outlined"
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+
+              <Grid item xs={12}>
                 <TextField
-                  label="Last Name"
-                  name="last_name"
+                  label="Location"
+                  name="location"
                   fullWidth
                   variant="outlined"
-                  required
                   margin="normal"
                   autoComplete="none"
                 />
@@ -102,24 +92,38 @@ const CreateProfile = props => {
             <Grid container>
               <Grid item xs={12}>
                 <TextField
-                  label="Email"
+                  label="Twitter"
                   fullWidth
                   variant="outlined"
-                  required
                   margin="normal"
-                  name="email"
+                  name="twitter"
                   autoComplete="none"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  error={formData.error}
-                  label="Password"
-                  name="password"
-                  type="password"
+                  label="Facebook"
+                  name="facebook"
                   fullWidth
                   variant="outlined"
-                  required
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Youtube"
+                  name="youtube"
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Instagram"
+                  name="Instagram"
+                  fullWidth
+                  variant="outlined"
                   margin="normal"
                 />
               </Grid>
