@@ -21,11 +21,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center"
   },
-  goalBook: {
-    fontWeight: "500",
-    fontFamily: "Ma Shan Zheng",
-    color: "#424242"
-  },
   submit: {
     margin: theme.spacing(2, 0, 2)
   },

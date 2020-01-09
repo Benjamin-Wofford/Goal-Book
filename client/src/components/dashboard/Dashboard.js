@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import {
   Typography,
-  TextField,
   Button,
   makeStyles,
   Container,
