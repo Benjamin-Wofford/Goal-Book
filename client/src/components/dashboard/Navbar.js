@@ -35,7 +35,7 @@ const Navbar = ({auth: { isAuthenticated, loading }, logout}) => {
           <Typography variant="h6" className={classes.title} noWrap>
             Goal Book
           </Typography>
-          <Button color="inherit">Dashboard</Button>
+          <Button href="/dashboard" color="inherit">Dashboard</Button>
           <Button href="/" color="inherit" onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>

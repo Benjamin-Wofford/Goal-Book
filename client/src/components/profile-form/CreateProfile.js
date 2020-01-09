@@ -32,27 +32,25 @@ const CreateProfile = props => {
 
   const [formData, setFormData] = useState({
     location: "",
-    status: "",
-    bio: "",
+    aboutme: "",
     twitter: "",
     facebook: "",
-    linkedin: "",
     youtube: "",
     instagram: ""
   });
 
   // destructures so we don't have to call formData.location etc.
 
-  const {
-    location,
-    status,
-    bio,
-    twitter,
-    facebook,
-    linkedin,
-    youtube,
-    instagram
-  } = formData;
+  const { location, aboutme, twitter, facebook, youtube, instagram } = formData;
+
+  // This onChange method stores input from the field that is 
+  // being typed into the state of the formData hook, char by char.
+
+  const onChange = e =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
   return (
     <>
@@ -68,6 +66,9 @@ const CreateProfile = props => {
               <Grid item xs={12}>
                 <TextField
                   id="outlined-multiline-static"
+                  value={aboutme}
+                  name="aboutme"
+                  onChange={e => onChange(e)}
                   label="About me"
                   multiline
                   fullWidth
@@ -77,15 +78,16 @@ const CreateProfile = props => {
                   autoFocus
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   label="Location"
                   name="location"
+                  value={location}
                   fullWidth
                   variant="outlined"
                   margin="normal"
                   autoComplete="none"
+                  onChange={e => onChange(e)}
                 />
               </Grid>
             </Grid>
@@ -93,38 +95,46 @@ const CreateProfile = props => {
               <Grid item xs={12}>
                 <TextField
                   label="Twitter"
+                  value={twitter}
                   fullWidth
                   variant="outlined"
                   margin="normal"
                   name="twitter"
                   autoComplete="none"
+                  onChange={e => onChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="Facebook"
                   name="facebook"
+                  value={facebook}
                   fullWidth
                   variant="outlined"
                   margin="normal"
+                  onChange={e => onChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="Youtube"
                   name="youtube"
+                  value={youtube}
                   fullWidth
                   variant="outlined"
                   margin="normal"
+                  onChange={e => onChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="Instagram"
-                  name="Instagram"
+                  name="instagram"
+                  value={instagram}
                   fullWidth
                   variant="outlined"
                   margin="normal"
+                  onChange={e => onChange(e)}
                 />
               </Grid>
             </Grid>
