@@ -12,8 +12,14 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Typography
+  Typography,
+  Snackbar
 } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert'
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -37,7 +43,8 @@ const EditProfile = ({
   history
 }) => {
   const classes = useStyles();
-  let clicked = false;
+
+  const [open, setOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     location: "",
@@ -77,10 +84,21 @@ const EditProfile = ({
     });
 
   const onSubmit = e => {
-    clicked = true;
+    setOpen(true);
     e.preventDefault();
     createProfile(formData, history, true);
   };
+
+  // Snackbar opening and closing
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
     <>
       <Navbar />
@@ -88,7 +106,7 @@ const EditProfile = ({
         <CssBaseline />
         <div className={classes.paper}>
           <Typography variant="h3" noWrap>
-           Edit Your Profile
+            Edit Your Profile
           </Typography>
           <form className={classes.form} onSubmit={e => onSubmit(e)}>
             <Grid container spacing={1}>
@@ -173,10 +191,22 @@ const EditProfile = ({
               fullWidth
               type="submit"
               className={classes.submit}
-              href="/dashboard"
             >
               Edit
             </Button>
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left"
+              }}
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+            <Alert severity="success" onClose={handleClose}>
+                Edit Successful
+            </Alert>
+            </Snackbar>
           </form>
         </div>
       </Container>
