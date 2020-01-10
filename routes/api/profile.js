@@ -29,7 +29,7 @@ router.get("/me", auth, async (req, res) => {
 router.post("/", auth, async (req, res) => {
   const {
     location,
-    bio,
+    aboutme,
     goals,
     goalsCompleted,
     youtube,
@@ -43,7 +43,7 @@ router.post("/", auth, async (req, res) => {
   const profileFields = {};
   profileFields.user = req.user.id;
   if (location) profileFields.location = location;
-  if (bio) profileFields.bio = bio;
+  if (aboutme) profileFields.aboutme = aboutme;
   if (goals) profiledFields.goals = goals;
   if (goalsCompleted) profileFields.goalsCompleted = goalsCompleted;
 

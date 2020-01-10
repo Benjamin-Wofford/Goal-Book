@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { createProfile } from "../../actions/profile";
 import Navbar from "../dashboard/Navbar";
 import {
   TextField,
@@ -11,6 +13,7 @@ import {
   Grid,
   Typography
 } from "@material-ui/core";
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -43,7 +46,7 @@ const CreateProfile = props => {
 
   const { location, aboutme, twitter, facebook, youtube, instagram } = formData;
 
-  // This onChange method stores input from the field that is 
+  // This onChange method stores input from the field that is
   // being typed into the state of the formData hook, char by char.
 
   const onChange = e =>
@@ -52,6 +55,13 @@ const CreateProfile = props => {
       [e.target.name]: e.target.value
     });
 
+
+
+
+    const onSubmit = e => {
+        e.preventDefault()
+        props.createProfile(formData, props.history)
+    }
   return (
     <>
       <Navbar />
@@ -61,7 +71,7 @@ const CreateProfile = props => {
           <Typography variant="h3" noWrap>
             Create Your Profile
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={e => onSubmit(e)}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <TextField
@@ -154,6 +164,8 @@ const CreateProfile = props => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired
+};
 
-export default connect()(CreateProfile);
+export default connect(null, { createProfile })(withRouter(CreateProfile));

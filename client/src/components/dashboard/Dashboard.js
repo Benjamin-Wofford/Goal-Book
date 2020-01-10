@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import {
   Typography,
+
   Button,
   makeStyles,
   Container,
@@ -43,7 +44,15 @@ const Dashboard = ({
   // If there is no profile, then show a loading spinner
 
   return loading && profile === null ? (
-    <Spinner />
+    <>
+          <Navbar />
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+             <Spinner/>
+            </div>
+          </Container>
+        </>
   ) : (
     <>
       {profile !== null ? (
