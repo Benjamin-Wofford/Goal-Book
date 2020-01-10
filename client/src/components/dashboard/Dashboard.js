@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import GoalIcon from "../GoalIcon";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
+import DashboardActions from "./DashboardActions";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import {
@@ -53,10 +54,25 @@ const Dashboard = ({
       </Container>
     </>
   ) : (
+    // If there is a profile, then display dashboard actions.
+
     <>
       {profile !== null ? (
-        <>Has</>
+        <>
+          <Navbar />
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Typography variant="h5">{user && user.first_name}'s</Typography>
+              <Typography variant="h1"> Dashboard</Typography>
+              <GoalIcon />
+              <DashboardActions/>
+            </div>
+          </Container>
+        </>
       ) : (
+        // If there is not a profile, display the option to create a profile
+
         <>
           <Navbar />
           <Container component="main" maxWidth="xs">
