@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import GoalIcon from "../GoalIcon";
 import PropTypes from "prop-types";
@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import {
   Typography,
-
   Button,
   makeStyles,
   Container,
@@ -35,11 +34,9 @@ const Dashboard = ({
   auth: { user },
   profile: { profile, loading }
 }) => {
-
-
   useEffect(() => {
     getCurrentProfile();
-  },[]);
+  }, []);
 
   const classes = useStyles();
 
@@ -47,14 +44,14 @@ const Dashboard = ({
 
   return loading && profile === null ? (
     <>
-          <Navbar />
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-             <Spinner/>
-            </div>
-          </Container>
-        </>
+      <Navbar />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Spinner />
+        </div>
+      </Container>
+    </>
   ) : (
     <>
       {profile !== null ? (
@@ -69,16 +66,16 @@ const Dashboard = ({
               <Typography variant="h1"> Dashboard</Typography>
               <GoalIcon />
               <form noValidate className={classes.form}>
-                <Link to='/create-profile'>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  fullWidth
-                  className={classes.submit}
-                  type="submit"
-                >
-                  Create Profile
-                </Button>
+                <Link to="/create-profile">
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                    className={classes.submit}
+                    type="submit"
+                  >
+                    Create Profile
+                  </Button>
                 </Link>
               </form>
             </div>
