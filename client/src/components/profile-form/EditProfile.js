@@ -192,7 +192,17 @@ const EditProfile = ({
               type="submit"
               className={classes.submit}
             >
-              Edit
+              Submit
+            </Button>
+            <Button
+              color="secondary"
+              variant="outlined"
+              fullWidth
+              type="submit"
+              className={classes.submit}
+              href='/dashboard'
+            >
+              Go Back
             </Button>
             <Snackbar
               anchorOrigin={{
