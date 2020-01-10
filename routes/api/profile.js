@@ -8,7 +8,7 @@ const User = require("../../models/User");
 // The description: Get current user's profile
 // Who can access this route. The current user.
 
-router.get("/me", async (req, res) => {
+router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
@@ -17,8 +17,10 @@ router.get("/me", async (req, res) => {
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
+
+    res.json(profile)
   } catch (error) {
-    res.status(500).send("Server error");
+    res.status(500).send("Server error at fetch me");
   }
 });
 
@@ -76,7 +78,7 @@ router.post("/", auth, async (req, res) => {
     return res.json(profile);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send("Server error at create profile route");
   }
 
   res.send("You made it to the bottom of profile route");

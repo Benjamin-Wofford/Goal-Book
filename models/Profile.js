@@ -10,7 +10,7 @@ const ProfileSchema = new Schema({
   location: {
     type: String
   },
-  bio: {
+  aboutme: {
     type: String
   },
   goals:[
