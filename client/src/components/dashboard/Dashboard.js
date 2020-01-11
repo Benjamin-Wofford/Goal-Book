@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import GoalIcon from "../GoalIcon";
 import PropTypes from "prop-types";
@@ -36,8 +35,12 @@ const Dashboard = ({
   profile: { profile, loading }
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-  }, []);
+
+    setTimeout(() => {
+      getCurrentProfile();
+    }, 500)
+    
+  }, [getCurrentProfile]);
 
   const classes = useStyles();
 
@@ -64,9 +67,9 @@ const Dashboard = ({
             <CssBaseline />
             <div className={classes.paper}>
               <Typography variant="h5">{user && user.first_name}'s</Typography>
-              <Typography variant="h1"> Dashboard</Typography>
+              <Typography variant="h1"> Dashboard </Typography>
               <GoalIcon />
-              <DashboardActions/>
+              <DashboardActions />
             </div>
           </Container>
         </>
@@ -82,17 +85,16 @@ const Dashboard = ({
               <Typography variant="h1"> Dashboard</Typography>
               <GoalIcon />
               <form noValidate className={classes.form}>
-                <Link to="/create-profile">
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                    className={classes.submit}
-                    type="submit"
-                  >
-                    Create Profile
-                  </Button>
-                </Link>
+                <Button
+                  href="/create-profile"
+                  color="primary"
+                  variant="contained"
+                  fullWidth
+                  className={classes.submit}
+                  type="submit"
+                >
+                  Create Profile
+                </Button>
               </form>
             </div>
           </Container>

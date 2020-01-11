@@ -19,8 +19,10 @@ router.get("/me", auth, async (req, res) => {
     }
 
     res.json(profile)
+
   } catch (error) {
-    res.status(500).send("Server error at fetch me");
+    console.log(error.message)
+    res.status(500).send("Server error");
   }
 });
 

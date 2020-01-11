@@ -15,11 +15,11 @@ import {
   Typography,
   Snackbar
 } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert'
+import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -68,7 +68,13 @@ const EditProfile = ({
     });
 
     // When the getCurrentProfile is loading is when we want this to run
-  }, [loading]);
+  }, [
+    loading,
+    getCurrentProfile,
+    profile.aboutme,
+    profile.location,
+    profile.social
+  ]);
 
   // destructures so we don't have to call formData.location etc.
 
@@ -200,7 +206,7 @@ const EditProfile = ({
               fullWidth
               type="submit"
               className={classes.submit}
-              href='/dashboard'
+              href="/dashboard"
             >
               Go Back
             </Button>
@@ -213,9 +219,9 @@ const EditProfile = ({
               autoHideDuration={6000}
               onClose={handleClose}
             >
-            <Alert severity="success" onClose={handleClose}>
+              <Alert severity="success" onClose={handleClose}>
                 Edit Successful
-            </Alert>
+              </Alert>
             </Snackbar>
           </form>
         </div>
