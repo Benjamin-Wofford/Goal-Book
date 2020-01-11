@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Goal = require('../../models/Goal')
 
 // The route to the application is GET api/profile/me
 // The description: Get current user's profile
@@ -129,6 +130,11 @@ router.get("/user/:user_id", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
   try {
+
+
+    // Remove user post
+
+    await Goal.deleteMany({ user: req.user.id })
     // Remove profile
 
     await Profile.findOneAndRemove({ user: req.user.id }).populate("user", [
