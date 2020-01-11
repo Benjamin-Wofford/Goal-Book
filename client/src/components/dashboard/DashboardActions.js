@@ -26,12 +26,12 @@ const DashboardActions = ({ deleteAccount }) => {
     <>
       <form noValidate className={classes.form}>
         <Link to="/edit-profile" className={classes.editprofile}>
-          <Button color="primary" variant="outlined">
+          <Button size='large' color="primary" variant="contained">
             Edit Profile
           </Button>
         </Link>
         <Link to="/" className={classes.delete}>
-          <Button color="secondary" onClick={() => deleteAccount()}>
+          <Button size='large' color="secondary" onClick={() => deleteAccount()}>
             Delete My Account
           </Button>
         </Link>
