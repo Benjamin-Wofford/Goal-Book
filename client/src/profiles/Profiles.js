@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -80,7 +81,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                         <Typography>{profile.aboutme}</Typography>
                       </CardContent>
                       <CardActions>
-                        <Button href={`/profile/${profile._id}`} size="small" color="primary">
+                        <Button href={`/profile/user/${profile.user._id}`} size="small" color="primary">
                           View
                         </Button>
                       </CardActions>

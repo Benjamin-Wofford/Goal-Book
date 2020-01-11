@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signup from "./components/layout/Signup";
 import Alert from './components/layout/Alert'
 import Dashboard from './components/dashboard/Dashboard'
+import Profile from './components/profile/Profile'
 import CreateProfile from './components/profile-form/CreateProfile'
 import EditProfile from './components/profile-form/EditProfile'
 import Profiles from './profiles/Profiles'
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path="/" component={LoginBox} />
           <Route exact path="/Signup" component={Signup} />
           <Route exact path="/profiles" component={Profiles} />
+          <Route exact path="/profile/user/:id" component={Profile} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/create-profile" component={CreateProfile} />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
