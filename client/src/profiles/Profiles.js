@@ -8,13 +8,13 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   CssBaseline,
   Grid,
   Typography,
   Button,
   makeStyles,
-  Container
+  Container,
+  Avatar
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -25,20 +25,22 @@ const useStyles = makeStyles(theme => ({
   card: {
     height: "100%",
     display: "flex",
-    flexDirection: "column"
-  },
-  cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    flexDirection: "column", 
+    alignItems: 'center'
   },
   cardContent: {
     flexGrow: 1
   },
   profileHeader: {
-    textAlign: 'center'
+    textAlign: "center",
+    marginBottom: 10
+  },
+  avatar: {
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+    marginTop: 10
   }
 }));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   const classes = useStyles();
@@ -56,29 +58,29 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           <CssBaseline />
           <Navbar />
           <main>
-            
             <Container className={classes.cardGrid} maxWidth="md">
-            <Typography className={classes.profileHeader} variant='h2'>Profiles</Typography>
+              <Typography className={classes.profileHeader} variant="h2">
+                Profiles
+              </Typography>
               <Grid container spacing={4}>
-                {cards.map(card => (
-                  <Grid item key={card} xs={12} sm={6} md={4}>
+                {profiles.map(profile => (
+                  <Grid item key={profile._id} xs={12} sm={6} md={4}>
                     <Card className={classes.card}>
-                      <CardMedia
-                        className={classes.cardMedia}
-                        image="https://source.unsplash.com/random"
-                        title="Image title"
+                    
+                      <Avatar
+                        alt="Profile Image"
+                        src={profile.user.avatar}
+                        className={classes.avatar}
                       />
+                  
                       <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
-                          Heading
+                          Goals completed {profile.goalsCompleted}
                         </Typography>
-                        <Typography>
-                          This is a media card. You can use this section to
-                          describe the content.
-                        </Typography>
+                        <Typography>{profile.aboutme}</Typography>
                       </CardContent>
                       <CardActions>
-                        <Button size="small" color="primary">
+                        <Button href={`/profile/${profile._id}`} size="small" color="primary">
                           View
                         </Button>
                       </CardActions>
