@@ -155,7 +155,7 @@ const CreateProfile = props => {
               type="submit"
               className={classes.submit}
             >
-              Sign Up
+              Create Profile
             </Button>
           </form>
         </div>

@@ -61,7 +61,7 @@ const EditProfile = ({
     setFormData({
       location: loading || !profile.location ? "" : profile.location,
       aboutme: loading || !profile.aboutme ? "" : profile.aboutme,
-      twitter: loading || !profile.social.twitter ? "" : profile.social.twitter,
+      twitter: loading || !profile.social ? "" : profile.social.twitter,
       facebook: loading || !profile.social ? "" : profile.social.facebook,
       youtube: loading || !profile.social ? "" : profile.social.youtube,
       instagram: loading || !profile.social ? "" : profile.social.instagram
@@ -70,10 +70,7 @@ const EditProfile = ({
     // When the getCurrentProfile is loading is when we want this to run
   }, [
     loading,
-    getCurrentProfile,
-    profile.aboutme,
-    profile.location,
-    profile.social
+    getCurrentProfile
   ]);
 
   // destructures so we don't have to call formData.location etc.

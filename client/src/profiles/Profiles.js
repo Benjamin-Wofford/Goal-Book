@@ -19,8 +19,8 @@ import {
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
   },
   card: {
     height: "100%",
@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent: {
     flexGrow: 1
+  },
+  profileHeader: {
+    textAlign: 'center'
   }
 }));
 
@@ -51,11 +54,11 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
       ) : (
         <React.Fragment>
           <CssBaseline />
-          <Navbar/>
+          <Navbar />
           <main>
             
             <Container className={classes.cardGrid} maxWidth="md">
-              {/* End hero unit */}
+            <Typography className={classes.profileHeader} variant='h2'>Profiles</Typography>
               <Grid container spacing={4}>
                 {cards.map(card => (
                   <Grid item key={card} xs={12} sm={6} md={4}>
@@ -78,9 +81,6 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                         <Button size="small" color="primary">
                           View
                         </Button>
-                        <Button size="small" color="primary">
-                          Edit
-                        </Button>
                       </CardActions>
                     </Card>
                   </Grid>
@@ -88,7 +88,6 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
               </Grid>
             </Container>
           </main>
-          
         </React.Fragment>
       )}
     </>
@@ -96,8 +95,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
 };
 
 Profiles.propTypes = {
-  getProfiles: PropTypes.func.isRequired,
-  profiles: PropTypes.object.isRequired
+  getProfiles: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
