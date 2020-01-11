@@ -34,6 +34,11 @@ const Dashboard = ({
   auth: { user },
   profile: { profile, loading }
 }) => {
+
+  // Setting a delay because getCurrentProfile 
+  // was running before the user could load
+  // on the first login 
+  
   useEffect(() => {
 
     setTimeout(() => {
@@ -74,6 +79,7 @@ const Dashboard = ({
           </Container>
         </>
       ) : (
+        
         // If there is not a profile, display the option to create a profile
 
         <>

@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import { Button, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  submit: {
-    margin: theme.spacing(2, 0, 2)
-  },
   form: {
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(5), 
+  },
+  delete: {
+    margin: theme.spacing(1, 1, 1),
+    textDecoration: "none"
+  }, 
+  editprofile: {
+    textDecoration: "none",
+    margin: theme.spacing(1, 1, 1)
   }
 }));
 
@@ -23,10 +22,13 @@ const DashboardActions = () => {
   return (
     <>
       <form noValidate className={classes.form}>
-        <Link to="/edit-profile" style={{ textDecoration: "none" }}>
-          <Button color="primary" variant="outlined">
+        <Link to="/edit-profile" className={classes.editprofile}>
+          <Button color="primary" variant="outlined" >
             Edit Profile
           </Button>
+        </Link>
+        <Link to="/" className={classes.delete}>
+          <Button color="secondary" >Delete Profile</Button>
         </Link>
       </form>
     </>
