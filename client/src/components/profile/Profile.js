@@ -7,7 +7,6 @@ import {
   Container,
   CssBaseline,
   makeStyles,
-  Button,
   Card,
   Avatar,
   CardContent,
@@ -31,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     paddingLeft: "25vw",
     paddingRight: "25vw",
-    paddingBottom: "12.5vh"
+    paddingBottom: "6.5vh"
   },
   cardContent: {
     flexGrow: 1
@@ -53,6 +52,9 @@ const useStyles = makeStyles(theme => ({
   }, 
   goalsCompleted: {
     textAlign: 'center'
+  }, 
+  location: {
+    textAlign: 'center'
   }
 }));
 
@@ -65,6 +67,7 @@ const Profile = ({
 
   useEffect(() => {
     getProfileById(match.params.id);
+    
   }, [getProfileById, match.params.id]);
 
   return (
@@ -100,8 +103,12 @@ const Profile = ({
                 <Typography className={classes.firstName} noWrap gutterBottom variant="h3" component="h2">
                     {profile.user.first_name}'s Profile
                   </Typography>
+                
                   <Typography className={classes.goalsCompleted} noWrap gutterBottom variant="h4" component="h2">
                     Goals completed {profile.goalsCompleted}
+                  </Typography>
+                  <Typography className={classes.location} noWrap gutterBottom variant="h6" component="h2">
+                    {profile.location}
                   </Typography>
                   <Typography className={classes.motto}>{profile.aboutme}</Typography>
                 </CardContent>

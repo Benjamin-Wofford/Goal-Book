@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
   card: {
     height: "100%",
     display: "flex",
-    flexDirection: "column", 
-    alignItems: 'center'
+    flexDirection: "column",
+    alignItems: "center"
   },
   cardContent: {
     flexGrow: 1
@@ -39,11 +39,16 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(10),
     height: theme.spacing(10),
     marginTop: 10
+  },
+  name: {
+    textAlign: "center"
+  },
+  goalsCompleted: {
+    textAlign: "center"
   }
 }));
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
-
   const classes = useStyles();
 
   useEffect(() => {
@@ -67,21 +72,26 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                 {profiles.map(profile => (
                   <Grid item key={profile._id} xs={12} sm={6} md={4}>
                     <Card className={classes.card}>
-                    
                       <Avatar
                         alt="Profile Image"
                         src={profile.user.avatar}
                         className={classes.avatar}
                       />
-                  
                       <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography className={classes.name} variant="h6">
+                          {profile.user.first_name} {profile.user.last_name}
+                        </Typography>
+                        <Typography className={classes.goalsCompleted} gutterBottom variant="subtitle1" component="h2">
                           Goals completed {profile.goalsCompleted}
                         </Typography>
                         <Typography>{profile.aboutme}</Typography>
                       </CardContent>
                       <CardActions>
-                        <Button href={`/profile/user/${profile.user._id}`} size="small" color="primary">
+                        <Button
+                          href={`/profile/user/${profile.user._id}`}
+                          size="small"
+                          color="primary"
+                        >
                           View
                         </Button>
                       </CardActions>

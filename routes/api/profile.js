@@ -93,7 +93,7 @@ router.post("/", auth, async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
+    const profiles = await Profile.find().populate("user", ["first_name", "last_name", "avatar"]);
     res.json(profiles);
   } catch (error) {
     res.status(500).send("Server Error");
