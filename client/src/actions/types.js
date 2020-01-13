@@ -12,4 +12,5 @@ export const GET_PROFILES = 'GET_PROFILES'
 export const CLEAR_PROFILE = 'CLEAR_PROFILE'
 export const PROFILE_ERROR = 'PROFILE_ERROR'
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT'
-
+export const GET_GOALS = 'GET_GOALS'
+export const GOAL_ERROR = "GOAL_ERROR'"
