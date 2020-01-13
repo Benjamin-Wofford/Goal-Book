@@ -62,6 +62,7 @@ const Dashboard = ({
       </Container>
     </>
   ) : (
+    
     // If there is a profile, then display dashboard actions.
 
     <>

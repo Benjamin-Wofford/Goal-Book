@@ -59,9 +59,17 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <>
+      <Navbar />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Spinner />
+        </div>
+      </Container>
+    </>
       ) : (
-        <React.Fragment>
+        <>
           <CssBaseline />
           <Navbar />
           <main>
@@ -102,7 +110,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
               </Grid>
             </Container>
           </main>
-        </React.Fragment>
+        </>
       )}
     </>
   );
