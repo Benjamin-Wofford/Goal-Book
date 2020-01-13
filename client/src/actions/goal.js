@@ -5,7 +5,7 @@ import { GET_GOALS, GOAL_ERROR } from "./types";
 
 export const getGoals = () => async dispatch => {
   try {
-    const res = await axios.get("/api/posts");
+    const res = await axios.get("/api/goal/goalfeed");
 
     dispatch({
       type: GET_GOALS,

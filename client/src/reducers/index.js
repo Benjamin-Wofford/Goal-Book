@@ -2,6 +2,6 @@ import { combineReducers } from "redux";
 import alert from "./alert";
 import auth from "./auth";
 import profile from "./profile";
-import post from './goal'
+import goal from "./goal";
 
-export default combineReducers({ alert, auth, profile, post });
+export default combineReducers({ alert, auth, profile, goal });
