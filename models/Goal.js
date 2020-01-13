@@ -10,7 +10,10 @@ const GoalSchema = new Schema({
     type: String,
     required: true
   },
-  name: {
+  first_name: {
+    type: String
+  },
+  last_name: {
     type: String
   },
   avatar: {
@@ -35,25 +38,25 @@ const GoalSchema = new Schema({
         required: true
       },
       name: {
-          type: String
+        type: String
       },
       avatar: {
-          type: String
+        type: String
       },
       date: {
-          type: Date, 
-          default: Date.now
+        type: Date,
+        default: Date.now
       }
     }
   ],
   date: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   goalCompleted: {
-      type: Boolean,
-      default: false
+    type: Boolean,
+    default: false
   }
 });
 
-module.exports = Goal = mongoose.model('goal', GoalSchema)
+module.exports = Goal = mongoose.model("goal", GoalSchema);

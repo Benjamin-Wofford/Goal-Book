@@ -12,9 +12,9 @@ export const getGoals = () => async dispatch => {
       payload: res.data
     });
   } catch (error) {
-      dispatch({
-          type: GOAL_ERROR, 
-          payload: { msg: error.response.statusText, status: error.response.status}
-      })
+    dispatch({
+      type: GOAL_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
   }
 };

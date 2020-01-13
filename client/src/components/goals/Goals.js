@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Moment from 'react-moment'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getGoals } from "../../actions/goal";
@@ -8,6 +9,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import ChatIcon from '@material-ui/icons/Chat';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DoneIcon from '@material-ui/icons/Done';
 import {
   Typography,
   Container,
@@ -58,15 +60,18 @@ const useStyles = makeStyles(theme => ({
   },
   name: {
     textAlign: "center",
-    marginLeft: "1.2vw"
+    marginLeft: "2vw"
   },
   goalText: {
     marginTop: "5vh",
-    marginLeft: '1.5vw'
+    marginLeft: '3vw'
+  }, 
+  postedOn: {
+      marginLeft: "2vw"
   }
 }));
 
-const Goals = ({ getGoals, goal: { goals, loading } }) => {
+const Goals = ({ getGoals, goal: {goals, loading}}) => {
   useEffect(() => {
     getGoals();
   }, [getGoals]);
@@ -93,28 +98,24 @@ const Goals = ({ getGoals, goal: { goals, loading } }) => {
             Goals
           </Typography>
           <Grid container spacing={4}>
-            {goals.map(goal => (
-              <Grid item key={goal._id} xs={12}>
+            {goals.map(singleGoal => (
+              <Grid item key={singleGoal._id} xs={12}>
                 <Card fullWidth className={classes.card}>
                   <Grid container spacing={2}>
                     <Grid item>
-                      <Avatar className={classes.avatar} />
-                      <Typography variant="caption" className={classes.name}>
-                        Benjamin Wofford
+                      <Avatar className={classes.avatar} src={singleGoal.avatar} />
+                      <Typography variant="subtitle2" className={classes.name}>
+                        {singleGoal.first_name} {singleGoal.last_name}
+                      </Typography>
+                      <Typography variant='caption' className={classes.postedOn}>
+                          Posted on <Moment format='MM/DD/YYYY'>{singleGoal.date}</Moment>
                       </Typography>
                     </Grid>
                     <Grid item xs={12} sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          <Typography className={classes.goalText} variant="body1" gutterBottom>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Nunc dictum venenatis ex, non faucibus tellus
-                            iaculis vitae. Mauris et molestie ex. Aliquam erat
-                            volutpat. Nullam sed faucibus neque. Praesent diam
-                            sem, aliquet sed mi sed, maximus dapibus eros. Proin
-                            fermentum pretium nibh, in posuere dui posuere nec.
-                            Nam ultrices, libero in rutrum pretium, ante erat
-                            imperdiet nibh, sed sagittis ante turpis eget urna.
+                          <Typography className={classes.goalText} variant="h4" gutterBottom>
+                          {singleGoal.text}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -123,8 +124,11 @@ const Goals = ({ getGoals, goal: { goals, loading } }) => {
                   <CardContent className={classes.cardContent}></CardContent>
                   <CardActions>
                     <ThumbUpAltIcon/>
+                    <Typography variant="caption">{singleGoal.likes.length}</Typography>
                     <ThumbDownAltIcon/>
                     <ChatIcon/>
+                    <Typography variant="caption">{singleGoal.comments.length}</Typography>
+                    <DoneIcon/>
                     <DeleteIcon/>
                   </CardActions>
                 </Card>

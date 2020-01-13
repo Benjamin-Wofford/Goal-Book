@@ -31,7 +31,8 @@ router.post(
 
       const newGoal = new Goal({
         text: req.body.text,
-        name: user.name,
+        first_name: user.first_name,
+        last_name: user.last_name,
         avatar: user.avatar,
         user: req.user.id
       });
