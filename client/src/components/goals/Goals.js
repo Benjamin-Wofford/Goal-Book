@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import Moment from 'react-moment'
+import Moment from "react-moment";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getGoals } from "../../actions/goal";
 import Spinner from "../layout/Spinner";
 import Navbar from "../dashboard/Navbar";
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
-import ChatIcon from '@material-ui/icons/Chat';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DoneIcon from '@material-ui/icons/Done';
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
+import ChatIcon from "@material-ui/icons/Chat";
+import DeleteIcon from "@material-ui/icons/Delete";
+import DoneIcon from "@material-ui/icons/Done";
 import {
   Typography,
   Container,
@@ -64,14 +64,14 @@ const useStyles = makeStyles(theme => ({
   },
   goalText: {
     marginTop: "5vh",
-    marginLeft: '3vw'
-  }, 
+    marginLeft: "3vw"
+  },
   postedOn: {
-      marginLeft: "2vw"
+    marginLeft: "2vw"
   }
 }));
 
-const Goals = ({ getGoals, goal: {goals, loading}}) => {
+const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
   useEffect(() => {
     getGoals();
   }, [getGoals]);
@@ -100,22 +100,36 @@ const Goals = ({ getGoals, goal: {goals, loading}}) => {
           <Grid container spacing={4}>
             {goals.map(singleGoal => (
               <Grid item key={singleGoal._id} xs={12}>
-                <Card fullWidth className={classes.card}>
+                <Card fullwidth="true" className={classes.card}>
                   <Grid container spacing={2}>
                     <Grid item>
-                      <Avatar className={classes.avatar} src={singleGoal.avatar} />
+                      <Avatar
+                        className={classes.avatar}
+                        src={singleGoal.avatar}
+                      />
                       <Typography variant="subtitle2" className={classes.name}>
                         {singleGoal.first_name} {singleGoal.last_name}
                       </Typography>
-                      <Typography variant='caption' className={classes.postedOn}>
-                          Posted on <Moment format='MM/DD/YYYY'>{singleGoal.date}</Moment>
+                      <Typography
+                        variant="caption"
+                        className={classes.postedOn}
+                      >
+                        Posted on{" "}
+                        <Moment format="MM/DD/YYYY">{singleGoal.date}</Moment>
                       </Typography>
                     </Grid>
                     <Grid item xs={12} sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          <Typography className={classes.goalText} variant="h4" gutterBottom>
-                          {singleGoal.text}
+                          <Typography
+                            className={classes.goalText}
+                            variant="h4"
+                            gutterBottom
+                          >
+                            {singleGoal.text}
+                          </Typography>
+                          <Typography variant="h5">
+                            
                           </Typography>
                         </Grid>
                       </Grid>
@@ -123,13 +137,17 @@ const Goals = ({ getGoals, goal: {goals, loading}}) => {
                   </Grid>
                   <CardContent className={classes.cardContent}></CardContent>
                   <CardActions>
-                    <ThumbUpAltIcon/>
-                    <Typography variant="caption">{singleGoal.likes.length}</Typography>
-                    <ThumbDownAltIcon/>
-                    <ChatIcon/>
-                    <Typography variant="caption">{singleGoal.comments.length}</Typography>
-                    <DoneIcon/>
-                    <DeleteIcon/>
+                    <ThumbUpAltIcon />
+                    <Typography variant="caption">
+                      {singleGoal.likes.length}
+                    </Typography>
+                    <ThumbDownAltIcon />
+                    <ChatIcon />
+                    <Typography variant="caption">
+                      {singleGoal.comments.length}
+                    </Typography>
+                    {!auth.loading && singleGoal.user === auth.user._id && (<DoneIcon />)}
+                    {!auth.loading && singleGoal.user === auth.user._id && (<DeleteIcon />)}
                   </CardActions>
                 </Card>
               </Grid>
@@ -147,7 +165,8 @@ Goals.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  goal: state.goal
+  goal: state.goal,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getGoals })(Goals);
