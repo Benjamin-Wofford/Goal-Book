@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Moment from "react-moment";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getGoals } from "../../actions/goal";
 import Spinner from "../layout/Spinner";
@@ -43,7 +44,8 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
   cardContent: {
     flexGrow: 1
@@ -68,6 +70,16 @@ const useStyles = makeStyles(theme => ({
   },
   postedOn: {
     marginLeft: "2vw"
+  },
+  likeDislikeComment: {
+    color: "#909090",
+    gutterBottom: false
+  },
+  completeGoalIcon: {
+    color: "#008542"
+  },
+  deletGoalIcon: {
+    color: "#FF0000"
   }
 }));
 
@@ -123,31 +135,36 @@ const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
                         <Grid item xs>
                           <Typography
                             className={classes.goalText}
-                            variant="h4"
+                            variant="body1"
                             gutterBottom
                           >
                             {singleGoal.text}
                           </Typography>
-                          <Typography variant="h5">
-                            
-                          </Typography>
+                          <Typography variant="h5"></Typography>
                         </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
                   <CardContent className={classes.cardContent}></CardContent>
                   <CardActions>
-                    <ThumbUpAltIcon />
+                    <ThumbUpAltIcon className={classes.likeDislikeComment} />
                     <Typography variant="caption">
                       {singleGoal.likes.length}
                     </Typography>
-                    <ThumbDownAltIcon />
-                    <ChatIcon />
+                    <ThumbDownAltIcon className={classes.likeDislikeComment} />
+                    <Link to={`/goal/${singleGoal.user}`}>
+                      <ChatIcon className={classes.likeDislikeComment} />
+                    </Link>
+
                     <Typography variant="caption">
                       {singleGoal.comments.length}
                     </Typography>
-                    {!auth.loading && singleGoal.user === auth.user._id && (<DoneIcon />)}
-                    {!auth.loading && singleGoal.user === auth.user._id && (<DeleteIcon />)}
+                    {!auth.loading && singleGoal.user === auth.user._id && (
+                      <DoneIcon className={classes.completeGoalIcon} />
+                    )}
+                    {!auth.loading && singleGoal.user === auth.user._id && (
+                      <DeleteIcon className={classes.deletGoalIcon} />
+                    )}
                   </CardActions>
                 </Card>
               </Grid>
