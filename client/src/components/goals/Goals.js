@@ -23,7 +23,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    height: "auto", 
+    height: "auto",
     marginBottom: theme.spacing(3)
   },
   actionButtons: {
@@ -61,7 +61,7 @@ const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
       <CssBaseline />
       <Navbar />
       <main>
-        <Container >
+        <Container>
           <Typography variant="h2" className={classes.profileHeader}>
             Goals
           </Typography>
@@ -84,7 +84,7 @@ const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
                   direction="column"
                   justify="center"
                   alignItems="center"
-                  xs={3}   
+                  xs={3}
                 >
                   <Avatar className={classes.avatar} src={singleGoal.avatar} />
                   <Typography variant="caption">
@@ -101,15 +101,19 @@ const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
                     <ThumbUpAltIcon />
                     <ThumbDownAltIcon />
                     <ChatIcon />
-                    <DoneIcon />
-                    <DeleteIcon />
+                    {!auth.loading && singleGoal.user === auth.user._id && (
+                      <DoneIcon />
+                    )}
+                    {!auth.loading && singleGoal.user === auth.user._id && (
+                      <DeleteIcon />
+                    )}
                   </Grid>
                 </Grid>
               </Grid>
             ))}
           </Grid>
         </Container>
-        </main>
+      </main>
     </>
   );
 };
