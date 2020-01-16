@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL } from "./types";
+import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL, ADD_GOAL } from "./types";
 
 // Get goals
 
@@ -74,3 +74,29 @@ export const deleteGoal = goalId => async dispatch => {
     });
   }
 };
+
+// Add goal
+
+export const addGoal = formData => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    
+     await axios.post(`/api/goal`, formData, config);
+    
+    dispatch({
+      type: ADD_GOAL,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: GOAL_ERROR,
+      payload: { msg: error.response }
+    });
+  }
+};
+

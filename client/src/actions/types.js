@@ -16,3 +16,4 @@ export const GET_GOALS = "GET_GOALS";
 export const GOAL_ERROR = "GOAL_ERROR";
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const DELETE_GOAL = "DELETE_GOAL"
+export const ADD_GOAL = "ADD_GOAL"
