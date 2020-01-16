@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
     case ADD_GOAL:
       return {
         ...state,
-        goals: [...state.goals, payload],
+        goals: [payload, ...state.goals],
         loading: false
       };
     case DELETE_GOAL:

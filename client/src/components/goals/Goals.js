@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import Moment from "react-moment";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 import { addLike, removeLike, deleteGoal } from "../../actions/goal";
 import { getGoals } from "../../actions/goal";
-import GoalForm from '../GoalForm'
+import GoalForm from "../GoalForm";
 import Spinner from "../layout/Spinner";
 import Navbar from "../dashboard/Navbar";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -54,7 +55,6 @@ const Goals = ({
   }, [getGoals]);
 
   const classes = useStyles();
-  
 
   return loading ? (
     <>
@@ -75,10 +75,12 @@ const Goals = ({
           <Typography variant="h2" className={classes.profileHeader}>
             Goals
           </Typography>
-          
+
           {/* parent grid */}
           <Grid container spacing={4}>
-            <Grid item xs={12}><GoalForm/></Grid>
+            <Grid item xs={12}>
+              <GoalForm />
+            </Grid>
             {goals.map(singleGoal => (
               <Grid
                 className={classes.paper}
@@ -98,7 +100,14 @@ const Goals = ({
                   alignItems="center"
                   xs={3}
                 >
-                  <Avatar className={classes.avatar} src={singleGoal.avatar} />
+                  <Link to={`/profile/user/${singleGoal.user}`}>
+                    {" "}
+                    <Avatar
+                      className={classes.avatar}
+                      src={singleGoal.avatar}
+                    />
+                  </Link>
+
                   <Typography variant="caption">
                     {singleGoal.first_name} {singleGoal.last_name}
                   </Typography>
@@ -110,7 +119,6 @@ const Goals = ({
                 <Grid container item direction="column" xs={9}>
                   <Typography variant="body1">{singleGoal.text}</Typography>
                   <Grid item className={classes.actionButtons}>
-                    
                     <Button size="small" onClick={e => addLike(singleGoal._id)}>
                       <ThumbUpAltIcon />
                     </Button>
@@ -125,18 +133,20 @@ const Goals = ({
                       <ThumbDownAltIcon />
                     </Button>
 
-                    
-                      <Button href={`/goal/${singleGoal._id}`} size="small">
-                        <ChatIcon />
-                      </Button>
-            
+                    <Button href={`/goal/${singleGoal._id}`} size="small">
+                      <ChatIcon />
+                    </Button>
+
                     {!auth.loading && singleGoal.user === auth.user._id && (
                       <Button size="small">
                         <DoneIcon />
                       </Button>
                     )}
                     {!auth.loading && singleGoal.user === auth.user._id && (
-                      <Button onClick={e => deleteGoal(singleGoal._id)} size="small">
+                      <Button
+                        onClick={e => deleteGoal(singleGoal._id)}
+                        size="small"
+                      >
                         <DeleteIcon />
                       </Button>
                     )}
@@ -153,7 +163,7 @@ const Goals = ({
 
 Goals.propTypes = {
   getGoals: PropTypes.func.isRequired,
-  goal: PropTypes.object.isRequired, 
+  goal: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
   deleteGoal: PropTypes.func.isRequired
@@ -164,6 +174,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getGoals, addLike, removeLike, deleteGoal })(
-  Goals
-);
+export default connect(mapStateToProps, {
+  getGoals,
+  addLike,
+  removeLike,
+  deleteGoal
+})(Goals);
