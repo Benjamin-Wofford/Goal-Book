@@ -7,6 +7,7 @@ const GoalForm = ({ addGoal }) => {
 
   const [text, setText] = useState("");
 
+
   return (
     <>
       <form
