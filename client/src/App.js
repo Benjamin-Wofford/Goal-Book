@@ -11,6 +11,7 @@ import CreateProfile from "./components/profile-form/CreateProfile";
 import EditProfile from "./components/profile-form/EditProfile";
 import Profiles from "./profiles/Profiles";
 import Goals from "./components/goals/Goals";
+import Goal from "./components/goal/Goal";
 import PrivateRoute from "./components/routing/PrivateRoute";
 // Redux
 import { Provider } from "react-redux";
@@ -44,6 +45,7 @@ const App = () => {
           />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <PrivateRoute exact path="/goals" component={Goals} />
+          <PrivateRoute exact path="/goal/:id" component={Goal} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

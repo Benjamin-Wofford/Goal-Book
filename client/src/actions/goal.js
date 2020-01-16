@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL, ADD_GOAL } from "./types";
+import { GET_GOALS, GET_GOAL, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL, ADD_GOAL } from "./types";
 
 // Get goals
 
@@ -9,6 +9,24 @@ export const getGoals = () => async dispatch => {
 
     dispatch({
       type: GET_GOALS,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: GOAL_ERROR,
+      payload: { msg: error.response }
+    });
+  }
+};
+
+// Get goal
+
+export const getGoal = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/goal/${id}`);
+
+    dispatch({
+      type: GET_GOAL,
       payload: res.data
     });
   } catch (error) {

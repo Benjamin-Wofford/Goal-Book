@@ -1,5 +1,6 @@
 import {
   GET_GOALS,
+  GET_GOAL,
   GOAL_ERROR,
   UPDATE_LIKES,
   DELETE_GOAL,
@@ -23,6 +24,12 @@ export default function(state = initialState, action) {
         goals: payload,
         loading: false
       };
+      case GET_GOAL: 
+      return {
+        ...state, 
+        goal: payload, 
+        loading: false
+      }
     case ADD_GOAL:
       return {
         ...state,

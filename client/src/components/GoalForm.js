@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addGoal } from "../actions/goal";
-import { TextField, Button, makeStyles } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 
 const GoalForm = ({ addGoal }) => {
 
