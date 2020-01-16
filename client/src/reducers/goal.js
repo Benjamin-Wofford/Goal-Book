@@ -1,4 +1,10 @@
-import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL, ADD_GOAL } from "../actions/types";
+import {
+  GET_GOALS,
+  GOAL_ERROR,
+  UPDATE_LIKES,
+  DELETE_GOAL,
+  ADD_GOAL
+} from "../actions/types";
 
 const initialState = {
   goals: [],
@@ -17,18 +23,18 @@ export default function(state = initialState, action) {
         goals: payload,
         loading: false
       };
-      case ADD_GOAL: 
+    case ADD_GOAL:
       return {
-          ...state, 
-          goals: [...state.goals, payload], 
-          loading: false
-      }
-      case DELETE_GOAL: 
+        ...state,
+        goals: [...state.goals, payload],
+        loading: false
+      };
+    case DELETE_GOAL:
       return {
-          ...state, 
-          goals: state.goals.filter(goal => goal._id !== payload), 
-          loading: false
-      }
+        ...state,
+        goals: state.goals.filter(goal => goal._id !== payload),
+        loading: false
+      };
     case GOAL_ERROR:
       return {
         ...state,
@@ -39,8 +45,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         goals: state.goals.map(goal =>
-          console.log("goal id", goal._id) === console.log("payload id", payload.goalId) ? { ...goal, likes: payload.likes } : goal
-        ), 
+          goal._id === payload.goalId ? { ...goal, likes: payload.likes } : goal
+        ),
         loading: false
       };
     default:
