@@ -86,7 +86,7 @@ export const addGoal = formData => async dispatch => {
 
   try {
     
-     await axios.post(`/api/goal`, formData, config);
+     const res = await axios.post(`/api/goal`, formData, config);
     
     dispatch({
       type: ADD_GOAL,

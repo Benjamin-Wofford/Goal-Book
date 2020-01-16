@@ -5,12 +5,12 @@ import { addGoal } from '../../actions/goal'
 
 
 const GoalForm = ({ addGoal }) => {
-    
+
     const [text, setText] = useState('')
 
     return (
         <div>
-            
+          {/* Create the material ui version of what is on vlc    */}
         </div>
     )
 }
