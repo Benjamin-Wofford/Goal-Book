@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addLike, removeLike, deleteGoal } from "../../actions/goal";
 import { getGoals } from "../../actions/goal";
+import GoalForm from '../GoalForm'
 import Spinner from "../layout/Spinner";
 import Navbar from "../dashboard/Navbar";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -74,8 +75,10 @@ const Goals = ({
           <Typography variant="h2" className={classes.profileHeader}>
             Goals
           </Typography>
+          
           {/* parent grid */}
           <Grid container spacing={4}>
+            <Grid item xs={12}><GoalForm/></Grid>
             {goals.map(singleGoal => (
               <Grid
                 className={classes.paper}
