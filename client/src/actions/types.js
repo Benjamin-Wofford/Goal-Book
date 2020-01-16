@@ -14,4 +14,5 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 export const GET_GOALS = "GET_GOALS";
 export const GOAL_ERROR = "GOAL_ERROR";
-export const UPDATE_LIKES = 'UPDATE_LIKES'
+export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const DELETE_GOAL = "DELETE_GOAL"

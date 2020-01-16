@@ -1,4 +1,4 @@
-import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES } from "../actions/types";
+import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL } from "../actions/types";
 
 const initialState = {
   goals: [],
@@ -17,6 +17,12 @@ export default function(state = initialState, action) {
         goals: payload,
         loading: false
       };
+      case DELETE_GOAL: 
+      return {
+          ...state, 
+          goals: state.goals.filter(goal => goal._id !== payload), 
+          loading: false
+      }
     case GOAL_ERROR:
       return {
         ...state,
@@ -26,9 +32,9 @@ export default function(state = initialState, action) {
     case UPDATE_LIKES:
       return {
         ...state,
-        posts: state.goals.map(goal =>
-          goal._id === payload.id ? { ...goal, likes: payload.likes } : goal
-        ),
+        goals: state.goals.map(goal =>
+          console.log("goal id", goal._id) === console.log("payload id", payload.goalId) ? { ...goal, likes: payload.likes } : goal
+        ), 
         loading: false
       };
     default:

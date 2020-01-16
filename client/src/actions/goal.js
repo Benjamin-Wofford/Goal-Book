@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES } from "./types";
+import { GET_GOALS, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL } from "./types";
 
 // Get goals
 
@@ -47,6 +47,25 @@ export const removeLike = goalId => async dispatch => {
     dispatch({
       type: UPDATE_LIKES,
       payload: { goalId, likes: res.data }
+    });
+  } catch (error) {
+    dispatch({
+      type: GOAL_ERROR,
+      payload: { msg: error.response }
+    });
+  }
+};
+
+// Delete goal
+
+export const deleteGoal = goalId => async dispatch => {
+  try {
+    
+     await axios.delete(`/api/goal/${goalId}`);
+    
+    dispatch({
+      type: DELETE_GOAL,
+      payload: goalId
     });
   } catch (error) {
     dispatch({
