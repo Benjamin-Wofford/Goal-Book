@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { addLike, removeLike } from "../../actions/goal";
 import { getGoals } from "../../actions/goal";
 import Spinner from "../layout/Spinner";
 import Navbar from "../dashboard/Navbar";
@@ -39,7 +40,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
+const Goals = ({
+  getGoals,
+  auth,
+  addLike,
+  removeLike,
+  goal: { goals, user, loading }
+}) => {
   useEffect(() => {
     getGoals();
   }, [getGoals]);
@@ -98,9 +105,15 @@ const Goals = ({ getGoals, auth, goal: { goals, user, loading } }) => {
                 <Grid container item direction="column" xs={9}>
                   <Typography variant="body1">{singleGoal.text}</Typography>
                   <Grid item className={classes.actionButtons}>
-                    <ThumbUpAltIcon />
-                    <ThumbDownAltIcon />
-                    <ChatIcon />
+                    <ThumbUpAltIcon onClick={e => addLike(singleGoal._id)} />
+                    <Typography variant="caption">{singleGoal.likes.length}</Typography>
+                    
+                    <ThumbDownAltIcon
+                      onClick={e => removeLike(singleGoal._id)}
+                    />
+                    <Link to={`/goal/${singleGoal._id}`}>
+                      <ChatIcon />
+                    </Link>
                     {!auth.loading && singleGoal.user === auth.user._id && (
                       <DoneIcon />
                     )}
@@ -128,4 +141,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getGoals })(Goals);
+export default connect(mapStateToProps, { getGoals, addLike, removeLike })(
+  Goals
+);
