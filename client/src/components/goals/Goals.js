@@ -20,8 +20,7 @@ import {
   makeStyles,
   Grid,
   Avatar,
-  Paper,
-  Button
+  Paper
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({

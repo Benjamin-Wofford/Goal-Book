@@ -9,8 +9,10 @@ import {
   Button,
   makeStyles,
   Container,
-  CssBaseline
+  CssBaseline,
+  Snackbar
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -30,6 +32,9 @@ const useStyles = makeStyles(theme => ({
 const LoginBox = props => {
   const classes = useStyles();
 
+  // Snackbar state
+  const [open, setOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -43,7 +48,20 @@ const LoginBox = props => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    props.login(email, password);
+    try {
+      await props.login(email, password);
+    } catch (error) {
+      setOpen(true);
+    }
+  };
+
+  // Snackbar opening and closing
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   // Redirect if logged in
@@ -51,7 +69,7 @@ const LoginBox = props => {
   if (props.isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
-  
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -97,6 +115,19 @@ const LoginBox = props => {
           <Link to="/Signup" style={{ textDecoration: "none" }}>
             Don't have an account? Sign Up
           </Link>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left"
+            }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert severity="error" onClose={handleClose}>
+              Incorrect Email or Password
+            </Alert>
+          </Snackbar>
         </form>
       </div>
     </Container>
