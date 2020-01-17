@@ -15,7 +15,7 @@ import {
   Paper,
   Avatar,
   Typography,
-  Button
+  IconButton
 } from "@material-ui/core";
 import Navbar from "../dashboard/Navbar";
 
@@ -131,12 +131,12 @@ const Goal = ({ deleteComment, getGoal, user, auth, goal: { goal, loading }, mat
                   Posted on <Moment format="MM/DD/YYYY">{comment.date}</Moment>
                 </Typography>
                 {!auth.loading && goal.user === auth.user._id && (
-                  <Button
+                  <IconButton
                     onClick={e => deleteComment(goal._id, comment._id)}
                     size="small"
                   >
                     <DeleteIcon />
-                  </Button>
+                  </IconButton>
                 )}
               </Grid>
               <Grid container item direction="column" xs={9}>

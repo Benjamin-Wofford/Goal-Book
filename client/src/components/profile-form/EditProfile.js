@@ -47,7 +47,7 @@ const EditProfile = ({
 
   const [formData, setFormData] = useState({
     location: "",
-    aboutme: "",
+    motto: "",
     twitter: "",
     facebook: "",
     youtube: "",
@@ -59,7 +59,7 @@ const EditProfile = ({
 
     setFormData({
       location: loading || !profile.location ? "" : profile.location,
-      aboutme: loading || !profile.aboutme ? "" : profile.aboutme,
+      motto: loading || !profile.motto ? "" : profile.motto,
       twitter: loading || !profile.social ? "" : profile.social.twitter,
       facebook: loading || !profile.social ? "" : profile.social.facebook,
       youtube: loading || !profile.social ? "" : profile.social.youtube,
@@ -74,7 +74,7 @@ const EditProfile = ({
 
   // destructures so we don't have to call formData.location etc.
 
-  const { location, aboutme, twitter, facebook, youtube, instagram } = formData;
+  const { location, motto, twitter, facebook, youtube, instagram } = formData;
 
   // This onChange method stores input from the field that is
   // being typed into the state of the formData hook, char by char.
@@ -115,10 +115,10 @@ const EditProfile = ({
               <Grid item xs={12}>
                 <TextField
                   id="outlined-multiline-static"
-                  value={aboutme}
-                  name="aboutme"
+                  value={motto}
+                  name="motto"
                   onChange={e => onChange(e)}
-                  label="About me"
+                  label="Motto"
                   multiline
                   fullWidth
                   margin="normal"

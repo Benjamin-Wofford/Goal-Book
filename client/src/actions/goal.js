@@ -162,3 +162,4 @@ export const deleteComment = (goalId, commentId) => async dispatch => {
     });
   }
 }
+

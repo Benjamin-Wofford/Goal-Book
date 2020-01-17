@@ -12,8 +12,8 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
 import ChatIcon from "@material-ui/icons/Chat";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DoneIcon from "@material-ui/icons/Done";
 import {
+  IconButton,
   Typography,
   Container,
   CssBaseline,
@@ -34,7 +34,8 @@ const useStyles = makeStyles(theme => ({
   },
   profileHeader: {
     textAlign: "center",
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: theme.spacing(2)
   },
   avatar: {
     width: theme.spacing(7),
@@ -119,36 +120,31 @@ const Goals = ({
                 <Grid container item direction="column" xs={9}>
                   <Typography variant="body1">{singleGoal.text}</Typography>
                   <Grid item className={classes.actionButtons}>
-                    <Button size="small" onClick={e => addLike(singleGoal._id)}>
+                    <IconButton size="small" onClick={e => addLike(singleGoal._id)}>
                       <ThumbUpAltIcon />
-                    </Button>
+                    </IconButton>
 
                     <Typography variant="caption">
                       {singleGoal.likes.length}
                     </Typography>
-                    <Button
+                    <IconButton
                       size="small"
                       onClick={e => removeLike(singleGoal._id)}
                     >
                       <ThumbDownAltIcon />
-                    </Button>
+                    </IconButton>
 
-                    <Button href={`/goal/${singleGoal._id}`} size="small">
+                    <IconButton href={`/goal/${singleGoal._id}`} size="small">
                       <ChatIcon />
-                    </Button>
+                    </IconButton>
 
                     {!auth.loading && singleGoal.user === auth.user._id && (
-                      <Button size="small">
-                        <DoneIcon />
-                      </Button>
-                    )}
-                    {!auth.loading && singleGoal.user === auth.user._id && (
-                      <Button
+                      <IconButton
                         onClick={e => deleteGoal(singleGoal._id)}
                         size="small"
                       >
                         <DeleteIcon />
-                      </Button>
+                      </IconButton>
                     )}
                   </Grid>
                 </Grid>
