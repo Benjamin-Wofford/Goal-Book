@@ -6,3 +6,4 @@ client/node_modules/
 node_modules
 
 client/node_modules/@material-ui/core/node_modules
+config/production.json
