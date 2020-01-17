@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import Spinner from "../layout/Spinner";
 import CommentForm from "../../components/goal/CommentForm";
-import { getGoal } from "../../actions/goal";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { getGoal, deleteComment } from "../../actions/goal";
 import {
   makeStyles,
   Container,
@@ -13,7 +14,8 @@ import {
   Grid,
   Paper,
   Avatar,
-  Typography
+  Typography,
+  Button
 } from "@material-ui/core";
 import Navbar from "../dashboard/Navbar";
 
@@ -36,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Goal = ({ getGoal, goal: { goal, loading }, match }) => {
+const Goal = ({ deleteComment, getGoal, user, auth, goal: { goal, loading }, match }) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -56,9 +58,11 @@ const Goal = ({ getGoal, goal: { goal, loading }, match }) => {
   ) : (
     <>
       <Navbar />
-     
+
       <Container component="main">
-      <Typography className={classes.profileHeader} variant="h2">Comments</Typography>
+        <Typography className={classes.profileHeader} variant="h2">
+          Comments
+        </Typography>
         {/* Parent container */}
         <Grid container spacing={4}>
           <Grid
@@ -94,62 +98,71 @@ const Goal = ({ getGoal, goal: { goal, loading }, match }) => {
             <Grid container item direction="column" xs={9}>
               <Typography variant="body1">{goal.text}</Typography>
             </Grid>
-            
           </Grid>
-          {goal.comments.map(comment => (  
-    <Grid
-      className={classes.paper}
-      key={comment._id}
-      spacing={1}
-      container
-      item
-      direction="row"
-      alignItems="center"
-      component={Paper}
-    >
-      <Grid
-        item
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        xs={3}
-      >
-        <Link to={`/profile/user/${comment.user}`}>
-          {" "}
-          <Avatar className={classes.avatar} src={comment.avatar} />
-        </Link>
+          {goal.comments.map(comment => (
+            <Grid
+              className={classes.paper}
+              key={comment._id}
+              spacing={1}
+              container
+              item
+              direction="row"
+              alignItems="center"
+              component={Paper}
+            >
+              <Grid
+                item
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                xs={3}
+              >
+                <Link to={`/profile/user/${comment.user}`}>
+                  {" "}
+                  <Avatar className={classes.avatar} src={comment.avatar} />
+                  
+                </Link>
 
-        <Typography variant="caption">
-          {comment.first_name} {comment.last_name}
-        </Typography>
-        <Typography variant="caption" className={classes.postedOn}>
-          Posted on <Moment format="MM/DD/YYYY">{comment.date}</Moment>
-        </Typography>
-      </Grid>
-      <Grid container item direction="column" xs={9}>
-        <Typography variant="body1">{comment.text}</Typography>
-      </Grid>
-      </Grid>
-  ))}
+                <Typography variant="caption">
+                  {comment.first_name} {comment.last_name}
+                </Typography>
+                <Typography variant="caption" className={classes.postedOn}>
+                  Posted on <Moment format="MM/DD/YYYY">{comment.date}</Moment>
+                </Typography>
+                {!auth.loading && goal.user === auth.user._id && (
+                  <Button
+                    onClick={e => deleteComment(goal._id, comment._id)}
+                    size="small"
+                  >
+                    <DeleteIcon />
+                  </Button>
+                )}
+              </Grid>
+              <Grid container item direction="column" xs={9}>
+                <Typography variant="body1">{comment.text}</Typography>
+              </Grid>
+            </Grid>
+          ))}
           <Grid item xs={12}>
             <CommentForm goalId={goal._id} />
           </Grid>
-          
         </Grid>
       </Container>
-      
     </>
   );
 };
 
 Goal.propTypes = {
   getGoal: PropTypes.func.isRequired,
-  goal: PropTypes.object.isRequired
+  goal: PropTypes.object.isRequired,
+  deleteComment: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  goal: state.goal
+  goal: state.goal,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { getGoal })(Goal);
+export default connect(mapStateToProps, { getGoal, deleteComment })(Goal);
