@@ -4,7 +4,9 @@ import {
   GOAL_ERROR,
   UPDATE_LIKES,
   DELETE_GOAL,
-  ADD_GOAL
+  ADD_GOAL,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from "../actions/types";
 
 const initialState = {
@@ -24,12 +26,12 @@ export default function(state = initialState, action) {
         goals: payload,
         loading: false
       };
-      case GET_GOAL: 
+    case GET_GOAL:
       return {
-        ...state, 
-        goal: payload, 
+        ...state,
+        goal: payload,
         loading: false
-      }
+      };
     case ADD_GOAL:
       return {
         ...state,
@@ -55,6 +57,23 @@ export default function(state = initialState, action) {
           goal._id === payload.goalId ? { ...goal, likes: payload.likes } : goal
         ),
         loading: false
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        goal: { ...state.goal, comments: payload },
+        loading: false
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        goal: {
+          ...state.goal,
+          comments: state.goal.comments.filter(
+            comment => comment._id !== payload
+          ), 
+          loading: false
+        }
       };
     default:
       return state;

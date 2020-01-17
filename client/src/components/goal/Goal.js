@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import Spinner from "../layout/Spinner";
+import CommentForm from "../../components/goal/CommentForm";
 import { getGoal } from "../../actions/goal";
 import {
-  Button,
   makeStyles,
   Container,
   CssBaseline,
@@ -20,8 +20,7 @@ import Navbar from "../dashboard/Navbar";
 const useStyles = makeStyles(theme => ({
   paper: {
     height: "auto",
-    marginBottom: theme.spacing(3),
-    marginTop: theme.spacing(6)
+    marginBottom: theme.spacing(3)
   },
   actionButtons: {
     marginTop: "3vh"
@@ -56,8 +55,11 @@ const Goal = ({ getGoal, goal: { goal, loading }, match }) => {
   ) : (
     <>
       <Navbar />
-      <Container>
+      <Container component="main">
         <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <CommentForm goalId={goal._id} />
+          </Grid>
           <Grid
             className={classes.paper}
             key={goal._id}

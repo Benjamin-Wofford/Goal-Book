@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_GOALS, GET_GOAL, GOAL_ERROR, UPDATE_LIKES, DELETE_GOAL, ADD_GOAL } from "./types";
+import { GET_GOALS, GET_GOAL, GOAL_ERROR, ADD_COMMENT, REMOVE_COMMENT, UPDATE_LIKES, DELETE_GOAL, ADD_GOAL } from "./types";
 
 // Get goals
 
@@ -118,3 +118,47 @@ export const addGoal = formData => async dispatch => {
   }
 };
 
+// Add comment
+
+export const addComment = (goalId, formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    
+    const res = await axios.post(`/api/goal/comment/${goalId}`, formData, config);
+    
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: GOAL_ERROR,
+      payload: { msg: error.response }
+    });
+  }
+};
+
+// Delete comment
+
+export const deleteComment = (goalId, commentId) => async dispatch => {  
+
+  try {
+    
+    await axios.delete(`/api/goal/comment/${goalId}/${commentId}`);
+    
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: commentId
+    });
+  } catch (error) {
+    dispatch({
+      type: GOAL_ERROR,
+      payload: { msg: error.response }
+    });
+  }
+}
