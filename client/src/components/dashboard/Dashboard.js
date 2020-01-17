@@ -7,6 +7,7 @@ import DashboardActions from "./DashboardActions";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import {
+  Grid,
   Typography,
   Button,
   makeStyles,
@@ -34,17 +35,14 @@ const Dashboard = ({
   auth: { user },
   profile: { profile, loading }
 }) => {
-
-  // Setting a delay because getCurrentProfile 
+  // Setting a delay because getCurrentProfile
   // was running before the user could load
-  // on the first login 
-  
-  useEffect(() => {
+  // on the first login
 
+  useEffect(() => {
     setTimeout(() => {
       getCurrentProfile();
-    }, 500)
-    
+    }, 500);
   }, [getCurrentProfile]);
 
   const classes = useStyles();
@@ -62,7 +60,6 @@ const Dashboard = ({
       </Container>
     </>
   ) : (
-    
     // If there is a profile, then display dashboard actions.
 
     <>
@@ -71,16 +68,18 @@ const Dashboard = ({
           <Navbar />
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <div className={classes.paper}>
-              <Typography variant="h5">{user && user.first_name}'s</Typography>
-              <Typography variant="h1"> Dashboard </Typography>
-              <GoalIcon />
-              <DashboardActions />
-            </div>
+            
+              <div className={classes.paper}>
+                <Typography variant="h5">
+                  {user && user.first_name}'s
+                </Typography>
+                <Typography variant="h3"> Dashboard </Typography>
+                <GoalIcon />
+                <DashboardActions />
+              </div>
           </Container>
         </>
       ) : (
-        
         // If there is not a profile, display the option to create a profile
 
         <>
@@ -89,7 +88,7 @@ const Dashboard = ({
             <CssBaseline />
             <div className={classes.paper}>
               <Typography variant="h5">{user && user.first_name}'s</Typography>
-              <Typography variant="h1"> Dashboard</Typography>
+              <Typography variant="h3"> Dashboard</Typography>
               <GoalIcon />
               <form noValidate className={classes.form}>
                 <Button

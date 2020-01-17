@@ -1,10 +1,9 @@
 import React from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import RecentActorsIcon from '@material-ui/icons/RecentActors';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { makeStyles, AppBar, Toolbar, Typography, IconButton } from '@material-ui/core/';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../actions/auth'
@@ -35,10 +34,10 @@ const Navbar = ({auth: { isAuthenticated, loading }, logout}) => {
           <Typography variant="h6" className={classes.title} noWrap>
             Goal Book
           </Typography>
-          <Button href="/goals" color="inherit">Goals</Button>
-          <Button href="/profiles" color="inherit">Profiles</Button>
-          <Button href="/dashboard" color="inherit">Dashboard</Button>
-          <Button href="/" color="inherit" onClick={logout}>Logout</Button>
+          <IconButton href="/goals" color="inherit"><PlaylistAddCheckIcon/></IconButton>
+          <IconButton href="/profiles" color="inherit"><RecentActorsIcon/></IconButton>
+          <IconButton href="/dashboard" color="inherit"><HomeIcon/></IconButton>
+          <IconButton href="/" color="inherit" onClick={logout}><ExitToAppIcon/></IconButton>
         </Toolbar>
       </AppBar>
     

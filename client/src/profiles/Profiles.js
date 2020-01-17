@@ -90,9 +90,6 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                         <Typography className={classes.name} variant="h6">
                           {profile.user.first_name} {profile.user.last_name}
                         </Typography>
-                        <Typography className={classes.goalsCompleted} gutterBottom variant="subtitle1" component="h2">
-                          Goals completed {profile.goalsCompleted}
-                        </Typography>
                         <Typography>{profile.aboutme}</Typography>
                       </CardContent>
                       <CardActions>
