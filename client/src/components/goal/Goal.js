@@ -20,14 +20,15 @@ import Navbar from "../dashboard/Navbar";
 const useStyles = makeStyles(theme => ({
   paper: {
     height: "auto",
-    marginBottom: theme.spacing(3)
+    marginTop: theme.spacing(3)
   },
   actionButtons: {
     marginTop: "3vh"
   },
   profileHeader: {
     textAlign: "center",
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: theme.spacing(2)
   },
   avatar: {
     width: theme.spacing(7),
@@ -55,11 +56,11 @@ const Goal = ({ getGoal, goal: { goal, loading }, match }) => {
   ) : (
     <>
       <Navbar />
+     
       <Container component="main">
+      <Typography className={classes.profileHeader} variant="h2">Comments</Typography>
+        {/* Parent container */}
         <Grid container spacing={4}>
-          <Grid item xs={12}>
-            <CommentForm goalId={goal._id} />
-          </Grid>
           <Grid
             className={classes.paper}
             key={goal._id}
@@ -93,9 +94,51 @@ const Goal = ({ getGoal, goal: { goal, loading }, match }) => {
             <Grid container item direction="column" xs={9}>
               <Typography variant="body1">{goal.text}</Typography>
             </Grid>
+            
           </Grid>
+          {goal.comments.map(comment => (  
+    <Grid
+      className={classes.paper}
+      key={comment._id}
+      spacing={1}
+      container
+      item
+      direction="row"
+      alignItems="center"
+      component={Paper}
+    >
+      <Grid
+        item
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        xs={3}
+      >
+        <Link to={`/profile/user/${comment.user}`}>
+          {" "}
+          <Avatar className={classes.avatar} src={comment.avatar} />
+        </Link>
+
+        <Typography variant="caption">
+          {comment.first_name} {comment.last_name}
+        </Typography>
+        <Typography variant="caption" className={classes.postedOn}>
+          Posted on <Moment format="MM/DD/YYYY">{comment.date}</Moment>
+        </Typography>
+      </Grid>
+      <Grid container item direction="column" xs={9}>
+        <Typography variant="body1">{comment.text}</Typography>
+      </Grid>
+      </Grid>
+  ))}
+          <Grid item xs={12}>
+            <CommentForm goalId={goal._id} />
+          </Grid>
+          
         </Grid>
       </Container>
+      
     </>
   );
 };
