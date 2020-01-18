@@ -1,12 +1,3 @@
-/home/benjamin/Desktop/react_studio/goal-sharer/config/default.json
-/home/benjamin/Desktop/react_studio/goal-sharer/.vscode
-/home/benjamin/Desktop/react_studio/goal-sharer/client/node_modules
-/home/benjamin/Desktop/react_studio/goal-sharer/node_modules
-
-
-
-client/node_modules/@material-ui/core/node_modules
+/node_modules
+package-lock.json
 config/production.json
-
-node_modules
-client/node_modules/.cache/babel-loader/01c528407ce8e86bd45ed0a339ee0c72.json
