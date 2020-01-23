@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Profile = ({ match, getProfileById, profile: { profile, loading } }) => {
+const Profile = ({ match, auth, getProfileById, profile: { profile, loading } }) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -107,16 +107,20 @@ const Profile = ({ match, getProfileById, profile: { profile, loading } }) => {
             <CssBaseline />
             <div className={classes.paper}>
               <Card className={classes.card}>
+                
                 <Avatar
                   alt="Profile Image"
                   src={profile.user.avatar}
                   className={classes.avatar}
                 />
-                <Typography noWrap variant="subtitle1">
+                {!auth.loading && profile.user._id === auth.user._id && (
+                  <Typography noWrap variant="subtitle1">
                   <Link rel="noopener" target="_blank" href="https://wordpress.com/log-in?client_id=1854&redirect_to=https%3A%2F%2Fpublic-api.wordpress.com%2Foauth2%2Fauthorize%3Fclient_id%3D1854%26response_type%3Dcode%26blog_id%3D0%26state%3Dc3aacbad4170824d95c035b05ed7dd8d1231f37379a141587504929fffe23f78%26redirect_uri%3Dhttps%253A%252F%252Fen.gravatar.com%252Fconnect%252F%253Faction%253Drequest_access_token">
                     Edit Gravatar
                   </Link>
                 </Typography>
+                    )}
+                
                 <CardContent className={classes.cardContent}>
                   <Typography
                     className={classes.firstName}
