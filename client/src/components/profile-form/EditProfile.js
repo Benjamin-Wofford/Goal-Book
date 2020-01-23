@@ -143,7 +143,7 @@ const EditProfile = ({
             <Grid container>
               <Grid item xs={12}>
                 <TextField
-                  label="Twitter"
+                  label="https://twitter.com/example"
                   value={twitter}
                   fullWidth
                   variant="outlined"
@@ -155,7 +155,7 @@ const EditProfile = ({
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Facebook"
+                  label="https://facebook.com/example"
                   name="facebook"
                   value={facebook}
                   fullWidth
@@ -166,7 +166,7 @@ const EditProfile = ({
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Youtube"
+                  label="https://youtube.com/example"
                   name="youtube"
                   value={youtube}
                   fullWidth
@@ -177,7 +177,7 @@ const EditProfile = ({
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="Instagram"
+                  label="https://instagram.com/example"
                   name="instagram"
                   value={instagram}
                   fullWidth

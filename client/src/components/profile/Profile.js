@@ -148,14 +148,14 @@ const Profile = ({ match, auth, getProfileById, profile: { profile, loading } })
 
                 <div className={classes.socialMedias}>
                   {profile.social && profile.social.twitter && (
-                    <a
+                    <Link
                       href={profile.social.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={classes.twitter}
                     >
                       <TwitterIcon />
-                    </a>
+                    </Link>
                   )}
 
                   {profile.social && profile.social.facebook && (
