@@ -49,7 +49,7 @@ const LoginBox = props => {
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      await props.login(email, password);
+      await props.login(email.toLowerCase(), password);
     } catch (error) {
       setOpen(true);
     }

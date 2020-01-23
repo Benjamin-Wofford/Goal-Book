@@ -35,7 +35,7 @@ const Signup = props => {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
-    email: "",
+    email: "".toLowerCase(),
     password: "",
     password2: ""
   });
@@ -53,7 +53,7 @@ const Signup = props => {
   const handleOnSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      props.setAlert("Your password is incorrect", "danger", true);
+      props.setAlert("Your passwords don't match", "danger", true);
       return setFormData({ ...formData, error: true });
     } else {
       props.register({ first_name, last_name, email, password });
